@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Altcoin Check</title>
+<meta name="theme-color" content="#0f1115">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Altcoin Check">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--bg:#0f1115;--card:#171a21;--card2:#1d2129;--line:#262b36;--tx:#e6e8ee;--mut:#8a91a3;--acc:#3b82f6;
+--g:#22c55e;--gbg:#14532d;--gtx:#86efac;--y:#eab308;--ybg:#422006;--ytx:#fde047;--r:#ef4444;--rbg:#450a0a;--rtx:#fca5a5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.94);backdrop-filter:blur(8px);
+  padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:10px}
+h1{font-size:19px;margin:0;flex:1}
+.ib{background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;height:38px;min-width:38px;padding:0 10px;font-size:15px}
+.ib:active{opacity:.7}
+.stat{color:var(--mut);font-size:12px;margin-top:4px}
+.tools{display:flex;gap:8px;margin-top:10px}
+.tools input,.tools select{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:9px 10px;font-size:15px}
+.tools select{flex:0 0 auto}
+main{padding:12px 12px calc(env(safe-area-inset-bottom) + 30px)}
+.coin{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.coin:active{background:var(--card2)}
+.row1{display:flex;align-items:center;gap:10px}
+.sym{font-weight:700;font-size:16px}.nm{color:var(--mut);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grow{flex:1;min-width:0}
+.big{font-size:20px;font-weight:800;border-radius:10px;padding:4px 10px;min-width:52px;text-align:center}
+.pills{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.pill{border-radius:8px;padding:4px 0;text-align:center;font-size:12px;font-weight:700}
+.pill small{display:block;font-weight:500;font-size:10px;opacity:.85}
+.g{background:var(--gbg);color:var(--gtx)}.y{background:var(--ybg);color:var(--ytx)}.r{background:var(--rbg);color:var(--rtx)}.na{background:var(--card2);color:var(--mut)}
+.meta{display:flex;gap:12px;color:var(--mut);font-size:12px;margin-top:8px;flex-wrap:wrap}
+.empty{color:var(--mut);text-align:center;padding:40px 20px}
+.btn{display:block;width:100%;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:13px;font-size:16px;font-weight:700;margin-top:12px}
+.btn.alt{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
+.btn:disabled{opacity:.5}
+/* Detail */
+#detail{position:fixed;inset:0;background:var(--bg);z-index:10;overflow-y:auto;display:none;
+  padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 30px)}
+#detail.open{display:block}
+.dh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.sec h3{margin:0 0 6px;font-size:15px;display:flex;justify-content:space-between;align-items:center}
+.kv{display:flex;justify-content:space-between;font-size:14px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.kv:last-child{border:0}.kv span:first-child{color:var(--mut)}
+.note{color:var(--ytx);font-size:13px;margin-top:6px}
+.ans{font-size:14px;margin-top:6px;white-space:pre-wrap}
+.mini{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}.mini td,.mini th{border-bottom:1px solid var(--line);padding:4px;text-align:left;vertical-align:top}
+.mini th{color:var(--mut)}
+.links a{color:#93c5fd;font-size:13px;margin-right:10px}
+.disc{color:var(--mut);font-size:12px;text-align:center;margin-top:16px}
+/* Settings */
+.field{margin-bottom:12px}.field label{display:block;font-size:13px;color:var(--mut);margin-bottom:4px}
+.field input,.field select{width:100%;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px;font-size:15px}
+.hint{font-size:12px;color:var(--mut);margin-top:4px}
+#load{position:fixed;inset:0;background:rgba(15,17,21,.85);z-index:20;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:20px}
+#load.open{display:flex}
+.spin{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.err{background:var(--rbg);color:var(--rtx);border-radius:10px;padding:10px;font-size:14px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>Altcoin Check</h1>
+    <button class="ib" id="bRefresh" aria-label="Aktualisieren">↻</button>
+    <button class="ib" id="bSettings" aria-label="Einstellungen">⚙︎</button>
+  </div>
+  <div class="stat" id="stat">Noch keine Daten geladen</div>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Coin suchen …" autocomplete="off">
+    <select id="sort">
+      <option value="score">Score</option>
+      <option value="s1">1 Umsatz</option>
+      <option value="s2">2 Capture</option>
+      <option value="s3">3 Utility</option>
+      <option value="s4">4 Supply</option>
+      <option value="s5">5 Katalys.</option>
+      <option value="rank">Market Cap</option>
+    </select>
+  </div>
+</header>
+<main id="list"><div class="empty">Tippe auf ↻, um die Coins zu laden.</div></main>
+
+<div id="detail"></div>
+<div id="load"><div class="spin"></div><div id="loadTxt">Lade …</div></div>
+
+<script>
+"use strict";
+const CG = "https://api.coingecko.com/api/v3";
+const LL = "https://api.llama.fi";
+const EXCLUDE = new Set(["bitcoin","tether","usd-coin","dai","first-digital-usd","ethena-usde","usds","paypal-usd","true-usd","frax",
+ "wrapped-bitcoin","staked-ether","wrapped-steth","weth","wrapped-eeth","rocket-pool-eth","coinbase-wrapped-btc",
+ "binance-bridged-usdt-bnb-smart-chain","usd1-wlfi","susds","ethena-staked-usde","binance-peg-weth","lombard-staked-btc"]);
+
+// ---------- Speicher ----------
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(_){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){ } }
+};
+let settings = Object.assign({ top: 250, cgKey: "", aKey: "", model: "claude-sonnet-5-5" }, store.get("ac_settings", {}));
+let results = store.get("ac_results", []);
+let stamp = store.get("ac_stamp", null);
+let deep = store.get("ac_deep", {});
+
+// ---------- Helfer ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cls = v => v == null ? "na" : v >= 70 ? "g" : v >= 40 ? "y" : "r";
+function usd(v){
+  if(!v) return "–";
+  const u = [[1e9,"Mrd"],[1e6,"Mio"],[1e3,"Tsd"]].find(([d]) => Math.abs(v) >= d);
+  return u ? "$" + (v/u[0]).toLocaleString("de-DE",{maximumFractionDigits:2}) + " " + u[1]
+           : "$" + v.toLocaleString("de-DE",{maximumFractionDigits:4});
+}
+const pct = (v, f=1) => v == null ? "–" : (v*f).toLocaleString("de-DE",{maximumFractionDigits:1}) + " %";
+const num = (v, d=1) => v == null ? "–" : v.toLocaleString("de-DE",{maximumFractionDigits:d});
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function loading(on, txt){ $("#load").classList.toggle("open", on); if(txt) $("#loadTxt").textContent = txt; }
+
+async function getJSON(url, headers = {}, tries = 3){
+  for(let i = 0; i < tries; i++){
+    try{
+      const r = await fetch(url, { headers });
+      if(r.status === 429){ await sleep(4000 * (i+1)); continue; }
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      return await r.json();
+    }catch(e){ if(i === tries-1) throw e; await sleep(1500); }
+  }
+  throw new Error("Rate-Limit – bitte kurz warten");
+}
+const cgH = () => settings.cgKey ? { "x-cg-demo-api-key": settings.cgKey } : {};
+
+// ---------- Daten laden ----------
+async function loadAll(){
+  loading(true, "Lade Marktdaten (CoinGecko) …");
+  const coins = [];
+  let page = 1;
+  while(coins.length < settings.top){
+    const per = Math.min(250, settings.top - coins.length);
+    const d = await getJSON(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${per}&page=${page}&price_change_percentage=30d`, cgH());
+    if(!d || !d.length) break;
+    coins.push(...d); page++;
+    if(d.length < per) break;
+    if(coins.length < settings.top) await sleep(2500);
+  }
+  const alts = coins.filter(c => !EXCLUDE.has(c.id) &&
+    !(/(usd|eur)/i.test(c.symbol || "") && c.current_price > 0.9 && c.current_price < 1.2));
+
+  loading(true, "Lade Protokolle & TVL (DefiLlama) …");
+  const [protocols, chains] = await Promise.all([
+    getJSON(`${LL}/protocols`).catch(() => []),
+    getJSON(`${LL}/v2/chains`).catch(() => [])
+  ]);
+  const gmap = {}, tvl = {};
+  for(const p of protocols){
+    if(!p.gecko_id) continue;
+    for(const k of [p.slug, p.name]) if(k) gmap[k.toLowerCase()] = p.gecko_id;
+    if(typeof p.tvl === "number") tvl[p.gecko_id] = (tvl[p.gecko_id] || 0) + p.tvl;
+  }
+  for(const c of chains){
+    if(!c.gecko_id) continue;
+    if(c.name && !gmap[c.name.toLowerCase()]) gmap[c.name.toLowerCase()] = c.gecko_id;
+    if(typeof c.tvl === "number") tvl[c.gecko_id] = Math.max(tvl[c.gecko_id] || 0, c.tvl);
+  }
+
+  loading(true, "Lade Gebühren, Umsatz & Buybacks (DefiLlama) …");
+  const [fees, rev, hold] = await Promise.all(
+    ["dailyFees","dailyRevenue","dailyHoldersRevenue"].map(t => loadFees(t, gmap))
+  );
+
+  loading(true, "Bewerte …");
+  results = alts.map(c => analyze(c, fees, rev, hold, tvl));
+  stamp = Date.now();
+  store.set("ac_results", results); store.set("ac_stamp", stamp);
+  loading(false);
+  render();
+}
+
+async function loadFees(type, gmap){
+  const d = await getJSON(`${LL}/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=${type}`).catch(() => ({}));
+  const out = {};
+  for(const p of (d.protocols || [])){
+    let gid = p.gecko_id;
+    if(!gid) for(const k of [p.slug, p.name, p.displayName]) if(k && gmap[k.toLowerCase()]){ gid = gmap[k.toLowerCase()]; break; }
+    if(!gid) continue;
+    const e = out[gid] || (out[gid] = { d30: 0, y1: 0, src: [] });
+    e.d30 += +p.total30d || 0; e.y1 += +p.total1y || 0;
+    e.src.push(p.displayName || p.name);
+  }
+  return out;
+}
+
+// ---------- Bewertung ----------
+function annual(e){ if(!e) return 0; const a = e.d30 * 365 / 30; return a > 0 ? a : e.y1; }
+function stepUp(v, steps){ for(const [t, p] of steps) if(v >= t) return p; return 0; }
+function stepDown(v, steps){ for(const [t, p] of steps) if(v <= t) return p; return steps[steps.length-1][1]; }
+
+function analyze(c, fees, rev, hold, tvlMap){
+  const mc = c.market_cap || 0, fdv = c.fully_diluted_valuation || 0;
+  const circ = c.circulating_supply || 0, total = c.total_supply || 0, maxs = c.max_supply;
+  const feesY = annual(fees[c.id]), revY = annual(rev[c.id]), holdY = annual(hold[c.id]), tvl = tvlMap[c.id] || 0;
+  const r = { id: c.id, sym: (c.symbol || "").toUpperCase(), name: c.name, rank: c.market_cap_rank, img: c.image,
+    price: c.current_price, mc, fdv, ch30: c.price_change_percentage_30d_in_currency,
+    feesY, revY, holdY, tvl, notes: [], src: (rev[c.id] || fees[c.id] || {}).src || [] };
+
+  // 1 Umsatz
+  if(revY > 0 && mc > 0){
+    r.ps = mc / revY;
+    r.s1 = stepDown(r.ps, [[10,100],[25,80],[50,60],[100,40],[300,20],[Infinity,10]]);
+  } else { r.ps = null; r.s1 = 0; r.notes.push("Kein Protokoll-Umsatz bei DefiLlama erfasst"); }
+
+  // 2 Value Capture
+  if(holdY > 0 && mc > 0){
+    r.hy = holdY / mc * 100;
+    r.cap = revY > 0 ? holdY / revY : null;
+    r.s2 = stepUp(r.hy, [[8,100],[5,85],[3,70],[1.5,55],[0.5,35],[0.0001,15]]);
+  } else { r.hy = null; r.cap = null; r.s2 = 0; r.notes.push("Kein Buyback/Fee-Share bei DefiLlama erfasst – KI-Recherche prüft das genauer"); }
+
+  // 3 Utility
+  let u = 0;
+  if(feesY > 0 && mc > 0) u = stepUp(feesY / mc * 100, [[10,100],[5,80],[2,60],[0.5,40],[0.0001,20]]);
+  if(tvl > 0 && mc > 0){
+    const t = stepUp(tvl / mc, [[2,80],[1,65],[0.5,50],[0.1,30],[0.0001,10]]);
+    u = u === 0 ? t : Math.round(u * 0.75 + t * 0.25);
+  }
+  r.s3 = u;
+  if(!u) r.notes.push("Keine messbare Nutzung (Gebühren/TVL) gefunden");
+
+  // 4 Supply
+  const fin = maxs || total;
+  if(circ > 0 && fin){
+    r.circ = Math.min(circ / fin, 1);
+    r.s4 = stepUp(r.circ, [[0.9,100],[0.75,80],[0.6,65],[0.45,45],[0.3,30],[0,10]]);
+    if(!maxs){ r.s4 = Math.min(r.s4, 70); r.notes.push("Kein Max-Supply (unbegrenzt/inflationär) – Emission prüfen"); }
+  } else { r.circ = null; r.s4 = 0; r.notes.push("Angebotsdaten unvollständig"); }
+  r.fdvmc = mc && fdv ? fdv / mc : null;
+
+  r.base = Math.round(r.s1 * .25 + r.s2 * .25 + r.s3 * .2 + r.s4 * .3);
+  return r;
+}
+
+// Score inkl. KI-Ergebnis (Katalysatoren 15 %)
+function withDeep(r){
+  const d = deep[r.id];
+  const s5 = d && d.q5 && typeof d.q5.score === "number" ? Math.round(d.q5.score * 10) : null;
+  return Object.assign({}, r, { s5, score: s5 == null ? r.base : Math.round(r.base * .85 + s5 * .15) });
+}
+
+// ---------- Liste ----------
+function render(){
+  const list = $("#list");
+  if(stamp) $("#stat").textContent = `${results.length} Altcoins · Stand ${new Date(stamp).toLocaleString("de-DE",{dateStyle:"short",timeStyle:"short"})}`;
+  if(!results.length){ list.innerHTML = `<div class="empty">Tippe auf ↻, um die Coins zu laden.</div>`; return; }
+  const q = $("#q").value.trim().toLowerCase(), key = $("#sort").value;
+  let rows = results.map(withDeep).filter(r => !q || r.sym.toLowerCase().includes(q) || (r.name || "").toLowerCase().includes(q));
+  rows.sort((a, b) => key === "rank" ? (a.rank || 1e9) - (b.rank || 1e9) : (b[key] ?? -1) - (a[key] ?? -1));
+  rows = rows.slice(0, 300);
+  list.innerHTML = rows.map(r => `
+    <div class="coin" data-id="${esc(r.id)}">
+      <div class="row1">
+        <div class="grow"><div class="sym">${esc(r.sym)} <span class="nm">#${r.rank || "–"}</span></div><div class="nm">${esc(r.name)}</div></div>
+        <div class="big ${cls(r.score)}">${r.score}</div>
+      </div>
+      <div class="pills">
+        ${[["s1","Umsatz"],["s2","Capture"],["s3","Utility"],["s4","Supply"],["s5","Katal."]].map(([k,l]) =>
+          `<div class="pill ${cls(r[k])}">${r[k] ?? "–"}<small>${l}</small></div>`).join("")}
+      </div>
+      <div class="meta"><span>MC ${usd(r.mc)}</span><span>Umsatz/J ${usd(r.revY)}</span><span>Umlauf ${pct(r.circ,100)}</span></div>
+    </div>`).join("") || `<div class="empty">Kein Coin gefunden.</div>`;
+}
+
+// ---------- Detail ----------
+function openDetail(id, push = true){
+  const base = results.find(x => x.id === id); if(!base) return;
+  const r = withDeep(base), d = deep[id];
+  const kv = (k, v) => `<div class="kv"><span>${k}</span><span>${v}</span></div>`;
+  const sec = (title, s, body) => `<div class="sec"><h3>${title}<span class="pill ${cls(s)}" style="padding:2px 8px">${s ?? "–"}</span></h3>${body}</div>`;
+  const ans = k => d && d[k] ? `<div class="ans"><b>KI:</b> ${esc(d[k].answer)}</div>` : "";
+
+  let h = `<div class="dh"><button class="ib" id="bBack">‹ Zurück</button><div class="grow"><div class="sym">${esc(r.sym)}</div><div class="nm">${esc(r.name)}</div></div><div class="big ${cls(r.score)}">${r.score}</div></div>`;
+  h += `<div class="sec">${kv("Kurs", usd(r.price))}${kv("Market Cap", usd(r.mc))}${kv("FDV", usd(r.fdv) + " (×" + num(r.fdvmc,2) + ")")}${kv("Kurs 30 Tage", pct(r.ch30))}</div>`;
+  h += sec("1 · Real Revenue", r.s1, kv("Umsatz/Jahr", usd(r.revY)) + kv("P/S (MC ÷ Umsatz)", num(r.ps)) + (r.src.length ? kv("Quelle", esc(r.src.slice(0,3).join(", "))) : "") + ans("q1"));
+  h += sec("2 · Value Capture", r.s2, kv("An Holder/Jahr", usd(r.holdY)) + kv("Holder-Rendite", pct(r.hy)) + kv("Anteil vom Umsatz", pct(r.cap,100)) + ans("q2"));
+  h += sec("3 · Real Utility", r.s3, kv("Gebühren/Jahr", usd(r.feesY)) + kv("TVL", usd(r.tvl)) + ans("q3"));
+  let s4 = kv("Im Umlauf", pct(r.circ,100)) + ans("q4");
+  if(d && d.q4 && Array.isArray(d.q4.next_unlocks) && d.q4.next_unlocks.length)
+    s4 += `<table class="mini"><tr><th>Datum</th><th>Menge</th><th>% Umlauf</th><th>An</th></tr>${d.q4.next_unlocks.map(u =>
+      `<tr><td>${esc(u.date)}</td><td>${esc(u.amount)}</td><td>${esc(u.pct_circ)}</td><td>${esc(u.recipient)}</td></tr>`).join("")}</table>`;
+  h += sec("4 · Supply & Unlocks", r.s4, s4);
+  let s5 = d ? ans("q5") : `<div class="ans" style="color:var(--mut)">Nur per KI-Recherche (Button unten).</div>`;
+  if(d && d.q5 && Array.isArray(d.q5.catalysts) && d.q5.catalysts.length)
+    s5 += `<table class="mini"><tr><th>Wann</th><th>Ereignis</th><th>Wirkung</th></tr>${d.q5.catalysts.map(c =>
+      `<tr><td>${esc(c.date)}</td><td>${esc(c.event)}</td><td>${esc(c.impact)}</td></tr>`).join("")}</table>`;
+  h += sec("5 · Katalysatoren", r.s5, s5);
+  if(r.notes.length) h += `<div class="sec">${r.notes.map(n => `<div class="note">⚠ ${esc(n)}</div>`).join("")}</div>`;
+  if(d){
+    if(Array.isArray(d.red_flags) && d.red_flags.length) h += `<div class="sec"><h3>Red Flags</h3>${d.red_flags.map(f => `<div class="note">⚠ ${esc(f)}</div>`).join("")}</div>`;
+    if(d.fazit) h += `<div class="sec"><h3>Fazit</h3><div class="ans">${esc(d.fazit)}</div>${d._date ? `<div class="hint">Recherche vom ${esc(d._date)}</div>` : ""}</div>`;
+    if(Array.isArray(d.sources) && d.sources.length) h += `<div class="sec links"><h3>Quellen</h3>${d.sources.filter(s => /^https?:/.test(s)).map((s,i) => `<a href="${esc(s)}" target="_blank" rel="noopener">[${i+1}] ${esc(new URL(s).hostname)}</a>`).join(" ")}</div>`;
+  }
+  h += `<div class="sec links"><a href="https://www.coingecko.com/de/munze/${esc(r.id)}" target="_blank" rel="noopener">CoinGecko</a><a href="https://defillama.com/unlocks" target="_blank" rel="noopener">DefiLlama Unlocks</a><a href="https://tokenomist.ai" target="_blank" rel="noopener">Tokenomist</a></div>`;
+  h += `<div id="dErr"></div><button class="btn" id="bDeep">${d ? "KI-Recherche erneuern" : "KI-Recherche starten (alle 5 Fragen)"}</button>`;
+  h += `<div class="disc">Keine Anlageberatung.</div>`;
+  const el = $("#detail"); el.innerHTML = h; el.classList.add("open"); el.scrollTop = 0;
+  if(push) history.pushState({ d: id }, "");
+  $("#bBack").onclick = () => history.back();
+  $("#bDeep").onclick = () => runDeep(id);
+}
+function closeDetail(){ $("#detail").classList.remove("open"); render(); }
+window.addEventListener("popstate", () => { if($("#detail").classList.contains("open")) closeDetail(); });
+
+// ---------- KI-Recherche ----------
+function prompt(r){
+  return `Du bist ein sorgfältiger Krypto-Fundamentalanalyst. Recherchiere mit der Websuche aktuell (heute ist ${new Date().toLocaleDateString("de-DE")}) den Coin **${r.name} (${r.sym})**, CoinGecko-ID "${r.id}".
+
+Bekannte Kennzahlen (DefiLlama/CoinGecko, evtl. lückenhaft):
+- Market Cap ${usd(r.mc)}, FDV ${usd(r.fdv)}
+- Gebühren/Jahr ${usd(r.feesY)}, Protokoll-Umsatz/Jahr ${usd(r.revY)}, Holders Revenue/Jahr ${usd(r.holdY)}, TVL ${usd(r.tvl)}
+- Umlauf/Endangebot ${pct(r.circ,100)}
+
+Beantworte diese 5 Fragen knapp, faktenbasiert, mit Zahlen:
+1. Real Revenue: Erzielt das Projekt echten Umsatz? Woher? Wie hoch, Trend?
+2. Value Capture: Fließt der Umsatz zum Token (Buyback, Burn, Fee-Share)? Wie viel %, seit wann, beschlossen oder nur geplant?
+3. Real Utility: Wofür wird Token/Produkt real genutzt? Nutzer, Aktivität, Abhängigkeit von Incentives?
+4. Supply & Token Unlocks: Umlauf vs. Gesamtangebot, Inflation, nächste große Unlocks (Datum, Menge, % vom Umlauf, Empfänger).
+5. Kommende Katalysatoren (6–12 Monate): Kooperationen, Upgrades, Listings, ETF, Regulierung, Veränderungen im Marktumfeld – positiv wie negativ.
+
+Bewerte jede Frage 0–10 (10 = sehr stark für Token-Holder). Erfinde nichts; wenn nicht gefunden, schreibe "nicht gefunden".
+Antworte NUR mit JSON:
+{"q1":{"score":0,"answer":""},"q2":{"score":0,"answer":""},"q3":{"score":0,"answer":""},
+"q4":{"score":0,"answer":"","next_unlocks":[{"date":"","amount":"","pct_circ":"","recipient":""}]},
+"q5":{"score":0,"answer":"","catalysts":[{"date":"","event":"","impact":"positiv|negativ|unklar"}]},
+"red_flags":[""],"fazit":"","sources":["https://..."]}`;
+}
+
+async function runDeep(id){
+  const r = results.find(x => x.id === id);
+  const errBox = $("#dErr");
+  if(!settings.aKey){
+    errBox.innerHTML = `<div class="err">Für die KI-Recherche brauchst du einen Anthropic-API-Key. Trag ihn unter ⚙︎ Einstellungen ein.</div>`;
+    return;
+  }
+  const b = $("#bDeep"); b.disabled = true; b.textContent = "Recherchiere … (ca. 1 Minute)";
+  errBox.innerHTML = "";
+  try{
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-api-key": settings.aKey,
+        "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+      body: JSON.stringify({ model: settings.model, max_tokens: 4000,
+        tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 8 }],
+        messages: [{ role: "user", content: prompt(r) }] })
+    });
+    const j = await res.json();
+    if(!res.ok) throw new Error((j.error && j.error.message) || ("HTTP " + res.status));
+    const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("");
+    const a = text.indexOf("{"), z = text.lastIndexOf("}");
+    let parsed;
+    try{ parsed = JSON.parse(text.slice(a, z + 1)); }catch(_){ parsed = { fazit: text.trim().slice(0, 3000) }; }
+    parsed._date = new Date().toLocaleDateString("de-DE");
+    deep[id] = parsed; store.set("ac_deep", deep);
+    openDetail(id, false);
+  }catch(e){
+    errBox.innerHTML = `<div class="err">Fehler: ${esc(e.message)}</div>`;
+    b.disabled = false; b.textContent = "Nochmal versuchen";
+  }
+}
+
+// ---------- Einstellungen ----------
+function openSettings(){
+  const el = $("#detail");
+  el.innerHTML = `<div class="dh"><button class="ib" id="bBack">‹ Zurück</button><div class="grow sym">Einstellungen</div></div>
+  <div class="field"><label>Anzahl Coins (nach Market Cap)</label>
+    <select id="sTop">${[100,250,500].map(n => `<option ${n == settings.top ? "selected" : ""}>${n}</option>`).join("")}</select></div>
+  <div class="field"><label>CoinGecko Demo-API-Key (optional)</label><input id="sCg" value="${esc(settings.cgKey)}" placeholder="CG-…" autocomplete="off">
+    <div class="hint">Kostenlos auf coingecko.com/de/api – hilft, wenn „Rate-Limit“ kommt.</div></div>
+  <div class="field"><label>Anthropic-API-Key (für KI-Recherche)</label><input id="sAk" type="password" value="${esc(settings.aKey)}" placeholder="sk-ant-…" autocomplete="off">
+    <div class="hint">Von console.anthropic.com. Bleibt nur auf deinem Handy gespeichert. Kostet pro Recherche ein paar Cent.</div></div>
+  <div class="field"><label>KI-Modell</label><input id="sModel" value="${esc(settings.model)}"></div>
+  <button class="btn" id="bSave">Speichern</button>
+  <button class="btn alt" id="bClear">KI-Ergebnisse löschen</button>
+  <div class="disc">Daten: CoinGecko, DefiLlama · Keine Anlageberatung.</div>`;
+  el.classList.add("open"); history.pushState({ s: 1 }, "");
+  $("#bBack").onclick = () => history.back();
+  $("#bSave").onclick = () => {
+    settings = { top: +$("#sTop").value, cgKey: $("#sCg").value.trim(), aKey: $("#sAk").value.trim(), model: $("#sModel").value.trim() || "claude-sonnet-5-5" };
+    store.set("ac_settings", settings); history.back();
+  };
+  $("#bClear").onclick = () => { deep = {}; store.set("ac_deep", deep); history.back(); };
+}
+
+// ---------- Start ----------
+$("#bRefresh").onclick = () => loadAll().catch(e => { loading(false);
+  $("#list").innerHTML = `<div class="err">Laden fehlgeschlagen: ${esc(e.message)}. Prüfe die Internetverbindung oder warte eine Minute (Rate-Limit).</div>` + $("#list").innerHTML; });
+$("#bSettings").onclick = openSettings;
+$("#q").oninput = render;
+$("#sort").onchange = render;
+$("#list").onclick = e => { const c = e.target.closest(".coin"); if(c) openDetail(c.dataset.id); };
+render();
+if(!results.length || Date.now() - (stamp || 0) > 6 * 3600 * 1000) $("#bRefresh").click();
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>
