@@ -14,59 +14,84 @@
 <link rel="icon" href="icon-192.png">
 <style>
 :root{--bg:#0f1115;--card:#171a21;--card2:#1d2129;--line:#262b36;--tx:#e6e8ee;--mut:#8a91a3;--acc:#3b82f6;
---g:#22c55e;--gbg:#14532d;--gtx:#86efac;--y:#eab308;--ybg:#422006;--ytx:#fde047;--r:#ef4444;--rbg:#450a0a;--rtx:#fca5a5}
+--g:#22c55e;--gbg:#14532d;--gtx:#86efac;--y:#eab308;--ybg:#422006;--ytx:#fde047;--r:#ef4444;--rbg:#450a0a;--rtx:#fca5a5;--btc:#f7931a}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+button{font:inherit}
 header{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.94);backdrop-filter:blur(8px);
   padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;border-bottom:1px solid var(--line)}
 .top{display:flex;align-items:center;gap:10px}
 h1{font-size:19px;margin:0;flex:1}
-.ib{background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;height:38px;min-width:38px;padding:0 10px;font-size:15px}
+.ib{background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;height:38px;min-width:38px;padding:0 10px;font-size:15px;cursor:pointer}
 .ib:active{opacity:.7}
 .stat{color:var(--mut);font-size:12px;margin-top:4px}
 .tools{display:flex;gap:8px;margin-top:10px}
 .tools input,.tools select{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:9px 10px;font-size:15px}
 .tools select{flex:0 0 auto}
-main{padding:12px 12px calc(env(safe-area-inset-bottom) + 30px)}
-.coin{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+main{padding:12px 12px calc(env(safe-area-inset-bottom) + 30px);max-width:760px;margin:0 auto}
+.coin{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;cursor:pointer}
 .coin:active{background:var(--card2)}
 .row1{display:flex;align-items:center;gap:10px}
+.logo{width:32px;height:32px;border-radius:50%;background:var(--card2);flex:0 0 auto}
 .sym{font-weight:700;font-size:16px}.nm{color:var(--mut);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .grow{flex:1;min-width:0}
-.big{font-size:20px;font-weight:800;border-radius:10px;padding:4px 10px;min-width:52px;text-align:center}
-.pills{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.big{font-size:20px;font-weight:800;border-radius:10px;padding:4px 10px;min-width:58px;text-align:center}
+.big small{display:block;font-size:9px;font-weight:600;opacity:.8;margin-top:-2px}
+.pills{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
 .pill{border-radius:8px;padding:4px 0;text-align:center;font-size:12px;font-weight:700}
 .pill small{display:block;font-weight:500;font-size:10px;opacity:.85}
 .g{background:var(--gbg);color:var(--gtx)}.y{background:var(--ybg);color:var(--ytx)}.r{background:var(--rbg);color:var(--rtx)}.na{background:var(--card2);color:var(--mut)}
 .meta{display:flex;gap:12px;color:var(--mut);font-size:12px;margin-top:8px;flex-wrap:wrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1px 6px;vertical-align:middle}
 .empty{color:var(--mut);text-align:center;padding:40px 20px}
-.btn{display:block;width:100%;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:13px;font-size:16px;font-weight:700;margin-top:12px}
+.btn{display:block;width:100%;background:var(--acc);color:#fff;border:0;border-radius:12px;padding:13px;font-size:16px;font-weight:700;margin-top:12px;cursor:pointer}
 .btn.alt{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
 .btn:disabled{opacity:.5}
-/* Detail */
 #detail{position:fixed;inset:0;background:var(--bg);z-index:10;overflow-y:auto;display:none;
   padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 30px)}
 #detail.open{display:block}
+#dIn{max-width:760px;margin:0 auto}
 .dh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
-.sec h3{margin:0 0 6px;font-size:15px;display:flex;justify-content:space-between;align-items:center}
-.kv{display:flex;justify-content:space-between;font-size:14px;padding:3px 0;border-bottom:1px dashed var(--line)}
-.kv:last-child{border:0}.kv span:first-child{color:var(--mut)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px}
+.box h3{margin:0 0 6px;font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.grp{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:18px 4px 8px}
+.kv{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.kv:last-child{border:0}.kv span:first-child{color:var(--mut)}.kv span:last-child{text-align:right}
 .note{color:var(--ytx);font-size:13px;margin-top:6px}
-.ans{font-size:14px;margin-top:6px;white-space:pre-wrap}
-.mini{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}.mini td,.mini th{border-bottom:1px solid var(--line);padding:4px;text-align:left;vertical-align:top}
-.mini th{color:var(--mut)}
-.links a{color:#93c5fd;font-size:13px;margin-right:10px}
+.ans{font-size:14px;margin-top:8px;white-space:pre-wrap}
+.ans b{color:var(--mut);font-weight:600}
+.hint{font-size:12px;color:var(--mut);margin-top:4px}
+.mini{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}.mini td,.mini th{border-bottom:1px solid var(--line);padding:5px 4px;text-align:left;vertical-align:top}
+.mini th{color:var(--mut);font-weight:600}.mini tr.me td{color:var(--gtx);font-weight:700}
+.links a{color:#93c5fd;font-size:13px;margin-right:12px;display:inline-block;margin-bottom:4px}
 .disc{color:var(--mut);font-size:12px;text-align:center;margin-top:16px}
-/* Settings */
+.flag{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.flag:last-child{border:0}
+.dot{width:12px;height:12px;border-radius:50%;flex:0 0 auto;margin-top:4px}
+.dot.r{background:var(--r)}.dot.g{background:var(--g)}.dot.na{background:#4b5263}.dot.y{background:var(--y)}
+.late{border-radius:12px;padding:10px 12px;margin-top:10px}
+.late b{display:block;font-size:15px}.late ul{margin:6px 0 0;padding-left:18px;font-size:13px}
+.seg{display:flex;gap:6px;margin:6px 0}.seg button{flex:1;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:8px;padding:6px;font-size:13px;cursor:pointer}
+.seg button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.bars .bl{display:flex;align-items:center;gap:8px;font-size:13px;margin:5px 0}
+.bars .bl span:first-child{width:86px;color:var(--mut)}
+.bars .track{flex:1;height:8px;background:var(--card2);border-radius:4px;overflow:hidden}
+.bars .fill{height:100%;border-radius:4px}
+.bars .bl span:last-child{width:34px;text-align:right;font-weight:700}
+.lock{color:var(--mut);font-size:14px;text-align:center;padding:10px}
+.rate{display:flex;gap:6px;margin-top:8px}.rate button{flex:1;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px 0;font-size:16px;font-weight:700;cursor:pointer}
+.rate button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 .field{margin-bottom:12px}.field label{display:block;font-size:13px;color:var(--mut);margin-bottom:4px}
 .field input,.field select{width:100%;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px;font-size:15px}
-.hint{font-size:12px;color:var(--mut);margin-top:4px}
 #load{position:fixed;inset:0;background:rgba(15,17,21,.85);z-index:20;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:20px}
 #load.open{display:flex}
 .spin{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:s 1s linear infinite}
+.spin.sm{width:16px;height:16px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:6px}
 @keyframes s{to{transform:rotate(360deg)}}
-.err{background:var(--rbg);color:var(--rtx);border-radius:10px;padding:10px;font-size:14px;margin-bottom:10px}
+.err{background:var(--rbg);color:var(--rtx);border-radius:10px;padding:10px;font-size:14px;margin:8px 0}
+svg text{font-family:inherit}
+.radarWrap{display:grid;grid-template-columns:1fr;gap:6px}
+@media(min-width:560px){.radarWrap{grid-template-columns:1fr 1fr;align-items:center}}
 </style>
 </head>
 <body>
@@ -81,87 +106,138 @@ main{padding:12px 12px calc(env(safe-area-inset-bottom) + 30px)}
     <input id="q" type="search" placeholder="Coin suchen …" autocomplete="off">
     <select id="sort">
       <option value="score">Score</option>
-      <option value="s1">1 Umsatz</option>
-      <option value="s2">2 Capture</option>
-      <option value="s3">3 Utility</option>
-      <option value="s4">4 Supply</option>
-      <option value="s5">5 Katalys.</option>
+      <option value="s1">Umsatz</option>
+      <option value="tok">Tokenomics</option>
+      <option value="s3">Utility</option>
+      <option value="btc30">Stärke vs BTC</option>
       <option value="rank">Market Cap</option>
     </select>
   </div>
 </header>
 <main id="list"><div class="empty">Tippe auf ↻, um die Coins zu laden.</div></main>
-
-<div id="detail"></div>
+<div id="detail"><div id="dIn"></div></div>
 <div id="load"><div class="spin"></div><div id="loadTxt">Lade …</div></div>
 
 <script>
 "use strict";
+/* =====================================================================
+   Altcoin Check – Version 2
+   A. Fundament: Umsatz · Tokenomics (Buyback/Burn, Supply, Unlocks) · Utility · Katalysatoren · Marktkapitalisierung
+   B. Markt & Timing: Trend gegen BTC · Momentum/Volumen/relative Stärke · Social (X über Grok)
+   C. Manuelle Checkliste: Narrativ (1–5) · Influencer-Call
+   ===================================================================== */
 const CG = "https://api.coingecko.com/api/v3";
 const LL = "https://api.llama.fi";
+const DAY = 864e5;
 const EXCLUDE = new Set(["bitcoin","tether","usd-coin","dai","first-digital-usd","ethena-usde","usds","paypal-usd","true-usd","frax",
  "wrapped-bitcoin","staked-ether","wrapped-steth","weth","wrapped-eeth","rocket-pool-eth","coinbase-wrapped-btc",
  "binance-bridged-usdt-bnb-smart-chain","usd1-wlfi","susds","ethena-staked-usde","binance-peg-weth","lombard-staked-btc"]);
+const MAJOR = ["binance","coinbase","okx","bybit","kraken","bitvavo","bitget","kucoin","upbit","gate","htx","crypto.com","bitstamp"];
+const GENERIC_CAT = /(ecosystem|portfolio|launchpool|launchpad|holdings|made in|alleged|ftx|index|binance hodler|airdrop|world liberty|coinbase 50|layer 1 \(l1\)|proof of|smart contract platform|governance)/i;
 
 // ---------- Speicher ----------
 const store = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(_){ return d; } },
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){ } }
 };
-let settings = Object.assign({ top: 250, cgKey: "", aKey: "", model: "claude-sonnet-5-5" }, store.get("ac_settings", {}));
-let results = store.get("ac_results", []);
-let stamp = store.get("ac_stamp", null);
-let deep = store.get("ac_deep", {});
+let settings = Object.assign({ top: 250, cgKey: "", aKey: "", model: "claude-sonnet-5-5", xKey: "", xModel: "grok-4.5" }, store.get("ac_settings", {}));
+let results = store.get("ac_results2", []);
+let stamp = store.get("ac_stamp2", null);
+let btcRow = store.get("ac_btc", null);
+const deep = store.get("ac_deep2", {}), social = store.get("ac_social", {}), bm = store.get("ac_bm", {}),
+      manual = store.get("ac_manual", {}), full = store.get("ac_full", {});
+const mem = { mkt: {}, btc: null, cats: null };
+let cur = null;               // aktuell geöffneter Coin
+const busy = {};              // laufende KI-Abfragen
 
 // ---------- Helfer ----------
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const cls = v => v == null ? "na" : v >= 70 ? "g" : v >= 40 ? "y" : "r";
+const cls10 = v => v == null ? "na" : v >= 7 ? "g" : v >= 4 ? "y" : "r";
+const f1 = v => v == null ? "–" : v.toLocaleString("de-DE",{minimumFractionDigits:1,maximumFractionDigits:1});
+const clamp = (v, a = 0, b = 10) => Math.max(a, Math.min(b, v));
 function usd(v){
-  if(!v) return "–";
+  if(v == null || v === 0) return "–";
   const u = [[1e9,"Mrd"],[1e6,"Mio"],[1e3,"Tsd"]].find(([d]) => Math.abs(v) >= d);
   return u ? "$" + (v/u[0]).toLocaleString("de-DE",{maximumFractionDigits:2}) + " " + u[1]
-           : "$" + v.toLocaleString("de-DE",{maximumFractionDigits:4});
+           : "$" + v.toLocaleString("de-DE",{maximumSignificantDigits:5});
 }
-const pct = (v, f=1) => v == null ? "–" : (v*f).toLocaleString("de-DE",{maximumFractionDigits:1}) + " %";
-const num = (v, d=1) => v == null ? "–" : v.toLocaleString("de-DE",{maximumFractionDigits:d});
+const pct = (v, f = 1, sign = false) => v == null || isNaN(v) ? "–" : (sign && v > 0 ? "+" : "") + (v*f).toLocaleString("de-DE",{maximumFractionDigits:1}) + " %";
+const num = (v, d = 1) => v == null || !isFinite(v) ? "–" : v.toLocaleString("de-DE",{maximumFractionDigits:d});
+const pnum = v => { const n = parseFloat(String(v ?? "").replace("%", "").replace(",", ".")); return isFinite(n) ? n : 0; };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const dstr = t => new Date(t).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"2-digit"});
 function loading(on, txt){ $("#load").classList.toggle("open", on); if(txt) $("#loadTxt").textContent = txt; }
-
+function parseJ(text){
+  const a = text.indexOf("{"), z = text.lastIndexOf("}");
+  if(a < 0 || z < 0) return null;
+  try{ return JSON.parse(text.slice(a, z + 1)); }catch(_){ return null; }
+}
+async function fetchT(url, opt = {}, ms = 60000){
+  const ac = new AbortController(); const t = setTimeout(() => ac.abort(), ms);
+  try{ return await fetch(url, Object.assign({}, opt, { signal: ac.signal })); } finally { clearTimeout(t); }
+}
 async function getJSON(url, headers = {}, tries = 3){
   for(let i = 0; i < tries; i++){
     try{
-      const r = await fetch(url, { headers });
-      if(r.status === 429){ await sleep(4000 * (i+1)); continue; }
+      const r = await fetchT(url, { headers });
+      if(r.status === 429){ await sleep(5000 * (i+1)); continue; }
       if(!r.ok) throw new Error("HTTP " + r.status);
       return await r.json();
     }catch(e){ if(i === tries-1) throw e; await sleep(1500); }
   }
   throw new Error("Rate-Limit – bitte kurz warten");
 }
-const cgH = () => settings.cgKey ? { "x-cg-demo-api-key": settings.cgKey } : {};
+// CoinGecko-Anfragen nacheinander mit Abstand (kostenloses Limit)
+let cgChain = Promise.resolve(), cgLast = 0;
+function cg(path){
+  const p = cgChain.then(async () => {
+    const gap = settings.cgKey ? 1300 : 2600;
+    const w = cgLast + gap - Date.now(); if(w > 0) await sleep(w);
+    cgLast = Date.now();
+    return getJSON(CG + path, settings.cgKey ? { "x-cg-demo-api-key": settings.cgKey } : {});
+  });
+  cgChain = p.catch(() => {});
+  return p;
+}
 
-// ---------- Daten laden ----------
+// ---------- Indikatoren ----------
+function smaSeries(a, n){ const o = []; let s = 0; for(let i = 0; i < a.length; i++){ s += a[i]; if(i >= n) s -= a[i-n]; o.push(i >= n-1 ? s/n : null); } return o; }
+function rsi(a, n = 14){
+  if(a.length < n + 1) return null;
+  let g = 0, l = 0;
+  for(let i = 1; i <= n; i++){ const d = a[i] - a[i-1]; if(d > 0) g += d; else l -= d; }
+  g /= n; l /= n;
+  for(let i = n + 1; i < a.length; i++){ const d = a[i] - a[i-1]; g = (g*(n-1) + Math.max(d,0))/n; l = (l*(n-1) + Math.max(-d,0))/n; }
+  return l === 0 ? 100 : 100 - 100/(1 + g/l);
+}
+function ema(a, n){ const k = 2/(n+1), o = []; let e = a[0]; a.forEach((v, i) => { e = i ? v*k + e*(1-k) : v; o.push(e); }); return o; }
+function macd(a){
+  if(a.length < 35) return null;
+  const e12 = ema(a, 12), e26 = ema(a, 26), m = a.map((_, i) => e12[i] - e26[i]), s = ema(m, 9), h = m.map((v, i) => v - s[i]);
+  return { hist: h[h.length-1], prev: h[h.length-2], line: m[m.length-1] };
+}
+const chg = (a, d) => a.length > d && a[a.length-1-d] ? a[a.length-1]/a[a.length-1-d] - 1 : null;
+const avg = a => a.length ? a.reduce((s, v) => s + v, 0)/a.length : null;
+function median(a){ const b = a.filter(v => v != null && isFinite(v)).sort((x, y) => x - y); return b.length ? b[Math.floor(b.length/2)] : null; }
+
+// ---------- Liste laden ----------
 async function loadAll(){
   loading(true, "Lade Marktdaten (CoinGecko) …");
-  const coins = [];
-  let page = 1;
+  const coins = []; let page = 1;
   while(coins.length < settings.top){
     const per = Math.min(250, settings.top - coins.length);
-    const d = await getJSON(`${CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${per}&page=${page}&price_change_percentage=30d`, cgH());
+    const d = await cg(`/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${per}&page=${page}&price_change_percentage=7d,30d,1y`);
     if(!d || !d.length) break;
     coins.push(...d); page++;
     if(d.length < per) break;
-    if(coins.length < settings.top) await sleep(2500);
   }
-  const alts = coins.filter(c => !EXCLUDE.has(c.id) &&
-    !(/(usd|eur)/i.test(c.symbol || "") && c.current_price > 0.9 && c.current_price < 1.2));
+  const b = coins.find(c => c.id === "bitcoin");
+  if(b) btcRow = { ch7: b.price_change_percentage_7d_in_currency, ch30: b.price_change_percentage_30d_in_currency, ch1y: b.price_change_percentage_1y_in_currency };
+  const alts = coins.filter(c => !EXCLUDE.has(c.id) && !(/(usd|eur)/i.test(c.symbol || "") && c.current_price > 0.9 && c.current_price < 1.2));
 
   loading(true, "Lade Protokolle & TVL (DefiLlama) …");
-  const [protocols, chains] = await Promise.all([
-    getJSON(`${LL}/protocols`).catch(() => []),
-    getJSON(`${LL}/v2/chains`).catch(() => [])
-  ]);
+  const [protocols, chains] = await Promise.all([ getJSON(`${LL}/protocols`).catch(() => []), getJSON(`${LL}/v2/chains`).catch(() => []) ]);
   const gmap = {}, tvl = {};
   for(const p of protocols){
     if(!p.gecko_id) continue;
@@ -173,20 +249,18 @@ async function loadAll(){
     if(c.name && !gmap[c.name.toLowerCase()]) gmap[c.name.toLowerCase()] = c.gecko_id;
     if(typeof c.tvl === "number") tvl[c.gecko_id] = Math.max(tvl[c.gecko_id] || 0, c.tvl);
   }
-
   loading(true, "Lade Gebühren, Umsatz & Buybacks (DefiLlama) …");
-  const [fees, rev, hold] = await Promise.all(
-    ["dailyFees","dailyRevenue","dailyHoldersRevenue"].map(t => loadFees(t, gmap))
-  );
+  const [fees, rev, hold] = await Promise.all(["dailyFees","dailyRevenue","dailyHoldersRevenue"].map(t => loadFees(t, gmap)));
 
   loading(true, "Bewerte …");
   results = alts.map(c => analyze(c, fees, rev, hold, tvl));
+  const med30 = median(results.map(r => r.ch30));
+  results.forEach(r => r.med30 = med30);
   stamp = Date.now();
-  store.set("ac_results", results); store.set("ac_stamp", stamp);
+  store.set("ac_results2", results); store.set("ac_stamp2", stamp); store.set("ac_btc", btcRow);
   loading(false);
   render();
 }
-
 async function loadFees(type, gmap){
   const d = await getJSON(`${LL}/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=${type}`).catch(() => ({}));
   const out = {};
@@ -195,220 +269,651 @@ async function loadFees(type, gmap){
     if(!gid) for(const k of [p.slug, p.name, p.displayName]) if(k && gmap[k.toLowerCase()]){ gid = gmap[k.toLowerCase()]; break; }
     if(!gid) continue;
     const e = out[gid] || (out[gid] = { d30: 0, y1: 0, src: [] });
-    e.d30 += +p.total30d || 0; e.y1 += +p.total1y || 0;
-    e.src.push(p.displayName || p.name);
+    e.d30 += +p.total30d || 0; e.y1 += +p.total1y || 0; e.src.push(p.displayName || p.name);
   }
   return out;
 }
-
-// ---------- Bewertung ----------
-function annual(e){ if(!e) return 0; const a = e.d30 * 365 / 30; return a > 0 ? a : e.y1; }
-function stepUp(v, steps){ for(const [t, p] of steps) if(v >= t) return p; return 0; }
-function stepDown(v, steps){ for(const [t, p] of steps) if(v <= t) return p; return steps[steps.length-1][1]; }
+function annual(e){ if(!e) return 0; const a = e.d30 * 365/30; return a > 0 ? a : e.y1; }
+const up = (v, steps) => { for(const [t, p] of steps) if(v >= t) return p; return 0; };
+const down = (v, steps) => { for(const [t, p] of steps) if(v <= t) return p; return steps[steps.length-1][1]; };
 
 function analyze(c, fees, rev, hold, tvlMap){
-  const mc = c.market_cap || 0, fdv = c.fully_diluted_valuation || 0;
-  const circ = c.circulating_supply || 0, total = c.total_supply || 0, maxs = c.max_supply;
-  const feesY = annual(fees[c.id]), revY = annual(rev[c.id]), holdY = annual(hold[c.id]), tvl = tvlMap[c.id] || 0;
+  const mc = c.market_cap || 0, fdv = c.fully_diluted_valuation || 0, circ = c.circulating_supply || 0;
+  const fin = c.max_supply || c.total_supply || 0;
   const r = { id: c.id, sym: (c.symbol || "").toUpperCase(), name: c.name, rank: c.market_cap_rank, img: c.image,
-    price: c.current_price, mc, fdv, ch30: c.price_change_percentage_30d_in_currency,
-    feesY, revY, holdY, tvl, notes: [], src: (rev[c.id] || fees[c.id] || {}).src || [] };
-
-  // 1 Umsatz
-  if(revY > 0 && mc > 0){
-    r.ps = mc / revY;
-    r.s1 = stepDown(r.ps, [[10,100],[25,80],[50,60],[100,40],[300,20],[Infinity,10]]);
-  } else { r.ps = null; r.s1 = 0; r.notes.push("Kein Protokoll-Umsatz bei DefiLlama erfasst"); }
-
-  // 2 Value Capture
-  if(holdY > 0 && mc > 0){
-    r.hy = holdY / mc * 100;
-    r.cap = revY > 0 ? holdY / revY : null;
-    r.s2 = stepUp(r.hy, [[8,100],[5,85],[3,70],[1.5,55],[0.5,35],[0.0001,15]]);
-  } else { r.hy = null; r.cap = null; r.s2 = 0; r.notes.push("Kein Buyback/Fee-Share bei DefiLlama erfasst – KI-Recherche prüft das genauer"); }
-
-  // 3 Utility
-  let u = 0;
-  if(feesY > 0 && mc > 0) u = stepUp(feesY / mc * 100, [[10,100],[5,80],[2,60],[0.5,40],[0.0001,20]]);
-  if(tvl > 0 && mc > 0){
-    const t = stepUp(tvl / mc, [[2,80],[1,65],[0.5,50],[0.1,30],[0.0001,10]]);
-    u = u === 0 ? t : Math.round(u * 0.75 + t * 0.25);
-  }
+    price: c.current_price, mc, fdv, vol: c.total_volume || 0, ath: c.ath_change_percentage,
+    ch7: c.price_change_percentage_7d_in_currency, ch30: c.price_change_percentage_30d_in_currency, ch1y: c.price_change_percentage_1y_in_currency,
+    feesY: annual(fees[c.id]), revY: annual(rev[c.id]), holdY: annual(hold[c.id]), tvl: tvlMap[c.id] || 0,
+    maxSupply: c.max_supply, src: (rev[c.id] || fees[c.id] || {}).src || [] };
+  // 1 Umsatz (0–100)
+  r.ps = r.revY > 0 && mc > 0 ? mc / r.revY : null;
+  r.s1 = r.ps == null ? 0 : down(r.ps, [[10,100],[25,80],[50,60],[100,40],[300,20],[Infinity,10]]);
+  // Value Capture (0–100)
+  r.hy = r.holdY > 0 && mc > 0 ? r.holdY / mc * 100 : null;
+  r.cap = r.holdY > 0 && r.revY > 0 ? r.holdY / r.revY : null;
+  r.s2 = r.hy == null ? 0 : up(r.hy, [[8,100],[5,85],[3,70],[1.5,55],[0.5,35],[0.0001,15]]);
+  // 3 Utility (0–100)
+  let u = r.feesY > 0 && mc > 0 ? up(r.feesY/mc*100, [[10,100],[5,80],[2,60],[0.5,40],[0.0001,20]]) : 0;
+  if(r.tvl > 0 && mc > 0){ const t = up(r.tvl/mc, [[2,80],[1,65],[0.5,50],[0.1,30],[0.0001,10]]); u = u ? Math.round(u*.75 + t*.25) : t; }
   r.s3 = u;
-  if(!u) r.notes.push("Keine messbare Nutzung (Gebühren/TVL) gefunden");
-
-  // 4 Supply
-  const fin = maxs || total;
-  if(circ > 0 && fin){
-    r.circ = Math.min(circ / fin, 1);
-    r.s4 = stepUp(r.circ, [[0.9,100],[0.75,80],[0.6,65],[0.45,45],[0.3,30],[0,10]]);
-    if(!maxs){ r.s4 = Math.min(r.s4, 70); r.notes.push("Kein Max-Supply (unbegrenzt/inflationär) – Emission prüfen"); }
-  } else { r.circ = null; r.s4 = 0; r.notes.push("Angebotsdaten unvollständig"); }
-  r.fdvmc = mc && fdv ? fdv / mc : null;
-
-  r.base = Math.round(r.s1 * .25 + r.s2 * .25 + r.s3 * .2 + r.s4 * .3);
+  // Supply (0–100)
+  r.circ = circ > 0 && fin ? Math.min(circ/fin, 1) : null;
+  r.s4 = r.circ == null ? 0 : up(r.circ, [[0.9,100],[0.75,80],[0.6,65],[0.45,45],[0.3,30],[0,10]]);
+  if(r.circ != null && !c.max_supply) r.s4 = Math.min(r.s4, 70);
+  r.fdvmc = mc && fdv ? fdv/mc : null;
+  r.liq = mc ? r.vol/mc : null;
   return r;
 }
 
-// Score inkl. KI-Ergebnis (Katalysatoren 15 %)
-function withDeep(r){
-  const d = deep[r.id];
-  const s5 = d && d.q5 && typeof d.q5.score === "number" ? Math.round(d.q5.score * 10) : null;
-  return Object.assign({}, r, { s5, score: s5 == null ? r.base : Math.round(r.base * .85 + s5 * .15) });
+// ---------- Kategorie-Scores 0–10 ----------
+const CATS = [
+  ["rev","Umsatz","A"],["tok","Tokenomics","A"],["util","Utility","A"],["kat","Katalysatoren","A"],["val","Bewertung","A"],
+  ["btc","Trend vs BTC","B"],["mom","Momentum","B"],["soc","Social X","B"],["nar","Narrativ","C"]];
+const WEIGHT = { rev:1.5, tok:1.5, util:1.2, kat:0.8, val:1.0, btc:1.0, mom:0.8, soc:0.5, nar:0.7 };
+const mix = (a, b) => a == null ? b : b == null ? a : (a + b)/2;
+
+function valuationScore(r, m){
+  const parts = [];
+  if(r.fdvmc != null) parts.push(down(r.fdvmc, [[1.2,10],[1.5,8],[2,6],[3,4],[Infinity,2]]));
+  if(r.liq != null) parts.push(up(r.liq, [[0.05,10],[0.02,8],[0.01,6],[0.003,4],[0,2]]));
+  if(m && m.leaderX != null) parts.push(m.leaderX <= 1.01 ? 5 : up(m.leaderX, [[20,9],[4,8],[1.3,6],[0,5]]));
+  return parts.length ? avg(parts) : null;
+}
+function listScore(r){
+  const v = valuationScore(r, null);
+  const tok = (r.s2 + r.s4)/20;
+  return Math.round(((r.s1/10)*1.5 + tok*1.5 + (r.s3/10)*1.2 + (v ?? 5)*1.0)/5.2*10)/10;
+}
+function scores(r){
+  const d = deep[r.id], s = social[r.id], m = mem.mkt[r.id], man = manual[r.id] || {};
+  const c = {};
+  c.rev = mix(r.revY > 0 ? r.s1/10 : (d ? null : 0), d?.revenue?.score);
+  let tok = mix((r.s2 + r.s4)/20, d?.tokenomics?.score);
+  if(r.circ != null && r.circ < 0.4) tok -= 1.5;
+  if(unlock30(r.id)?.big) tok -= 1.5;
+  if(d?.tokenomics?.insider_majority === true) tok -= 1.5;
+  c.tok = clamp(tok);
+  c.util = mix(r.s3 > 0 ? r.s3/10 : (d ? null : 0), d?.utility?.score);
+  c.kat = d?.catalysts?.score ?? null;
+  c.val = valuationScore(r, m);
+  c.btc = m ? m.btcScore : null;
+  c.mom = m ? m.momScore : null;
+  c.soc = s?.score ?? d?.social_fallback?.score ?? null;
+  c.nar = man.narrative ? man.narrative * 2 : null;
+  for(const k in c) if(c[k] != null) c[k] = clamp(c[k]);
+  let sw = 0, sv = 0;
+  for(const [k] of CATS) if(c[k] != null){ sw += WEIGHT[k]; sv += c[k]*WEIGHT[k]; }
+  let overall = sw ? sv/sw : null;
+  const fl = flags(r);
+  const reds = fl.filter(f => f.s === "r" && !f.info);
+  if(overall != null){
+    overall -= reds.filter(f => f.k !== "infl").length * 0.4;
+    if(man.influencer === true) overall -= 1;
+    overall = Math.round(clamp(overall)*10)/10;
+  }
+  return { c, overall, flags: fl, complete: !!d && !!m };
+}
+
+// ---------- Unlocks & Warnsignale ----------
+function unlocksOf(id){
+  const u = deep[id]?.tokenomics?.unlocks;
+  if(!Array.isArray(u)) return [];
+  return u.map(x => ({ ...x, t: Date.parse(x.date), pct_circ: pnum(x.pct_circ) })).filter(x => !isNaN(x.t) && x.t >= Date.now() - DAY).sort((a, b) => a.t - b.t);
+}
+function unlock30(id){
+  const d = deep[id]; if(!d) return null;
+  const in30 = unlocksOf(id).filter(u => u.t <= Date.now() + 30*DAY);
+  const big = in30.some(u => +u.pct_circ >= 2) || d.tokenomics?.large_unlock_30d === true;
+  return { big, list: in30 };
+}
+function flags(r){
+  const d = deep[r.id], m = mem.mkt[r.id], man = manual[r.id] || {};
+  const F = [];
+  F.push({ k:"circ", t:"Weniger als 40 % im Umlauf", s: r.circ == null ? "na" : r.circ < 0.4 ? "r" : "g", x: r.circ != null ? pct(r.circ,100) + " im Umlauf" : "keine Angebotsdaten" });
+  const u30 = unlock30(r.id);
+  F.push({ k:"u30", t:"Großer Unlock in den nächsten 30 Tagen", s: !u30 ? "na" : u30.big ? "r" : "g",
+    x: !u30 ? "wird mit der KI-Analyse geprüft" : u30.list.length ? u30.list.map(u => `${dstr(u.t)}: ${num(+u.pct_circ)} % vom Umlauf`).join(", ") : "kein großer Unlock gefunden" });
+  const nx = unlocksOf(r.id)[0];
+  F.push({ k:"next", info:true, t:"Nächster Unlock", s: nx ? "y" : "na",
+    x: nx ? `${dstr(nx.t)} · ${esc(nx.tokens || "")} ${nx.usd ? "(" + esc(nx.usd) + ")" : ""} · ${num(+nx.pct_circ)} % vom Umlauf · an ${esc(nx.recipient || "?")}` : d ? "kein anstehender Unlock gefunden" : "wird mit der KI-Analyse geprüft" });
+  const noRev = r.revY === 0 && !(d && d.revenue?.score >= 4);
+  const noCap = r.holdY === 0 && !(d && d.tokenomics?.has_value_capture === true);
+  F.push({ k:"rev", t:"Kein Umsatz oder nichts fließt an den Token", s: (noRev || noCap) ? "r" : "g",
+    x: noRev ? "kein nachweisbarer Umsatz" : noCap ? "Umsatz vorhanden, aber kein Buyback/Burn/Fee-Share" : "Umsatz fließt teilweise an Holder" });
+  const im = d?.tokenomics?.insider_majority;
+  F.push({ k:"ins", t:"Team & Insider halten die Mehrheit", s: im === true ? "r" : im === false ? "g" : "na",
+    x: d?.tokenomics?.insider_share_pct != null ? `Insider-Anteil ca. ${num(pnum(d.tokenomics.insider_share_pct))} %` : d ? "keine genauen Angaben gefunden" : "wird mit der KI-Analyse geprüft" });
+  F.push({ k:"ex", t:"Nur auf einer kleinen Börse handelbar", s: !m ? "na" : m.major.length ? "g" : "r",
+    x: !m ? "lädt …" : m.major.length ? "gelistet u. a. auf " + esc(m.major.slice(0, 5).join(", ")) : `keine große Börse (${m.exCount} Handelsplätze)` });
+  F.push({ k:"infl", t:"Kenne ich aus einem Influencer-Call", s: man.influencer === true ? "r" : man.influencer === false ? "g" : "na",
+    x: man.influencer == null ? "in der Checkliste unten beantworten" : man.influencer ? "Ja – besonders vorsichtig sein" : "Nein" });
+  return F;
+}
+
+// ---------- Markt & Timing (Detaildaten) ----------
+function pickCategory(cats){ return (cats || []).find(c => c && !GENERIC_CAT.test(c)) || null; }
+async function loadMarket(id){
+  const hit = mem.mkt[id]; if(hit && Date.now() - hit.at < 30*60e3) return hit;
+  const detail = await cg(`/coins/${encodeURIComponent(id)}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`);
+  const chart = await cg(`/coins/${encodeURIComponent(id)}/market_chart?vs_currency=usd&days=365&interval=daily`);
+  if(!mem.btc || Date.now() - mem.btc.at > 3*3600e3) mem.btc = { at: Date.now(), d: await cg(`/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily`) };
+  if(!mem.cats) mem.cats = await cg(`/coins/categories`).catch(() => []);
+  const catName = pickCategory(detail.categories);
+  const catObj = (mem.cats || []).find(c => c.name === catName);
+  const peers = catObj ? await cg(`/coins/markets?vs_currency=usd&category=${encodeURIComponent(catObj.id)}&order=market_cap_desc&per_page=10&page=1&price_change_percentage=30d`).catch(() => []) : [];
+  const m = computeMarket(results.find(x => x.id === id), detail, chart, mem.btc.d, peers, catName);
+  mem.mkt[id] = m;
+  return m;
+}
+function computeMarket(r, detail, chart, btc, peers, catName){
+  const bmap = new Map((btc.prices || []).map(([t, p]) => [Math.floor(t/DAY), p]));
+  const rows = (chart.prices || []).map(([t, p]) => ({ t, p, b: bmap.get(Math.floor(t/DAY)) })).filter(x => x.p && x.b);
+  const px = rows.map(x => x.p), ratio = rows.map(x => x.p/x.b), ts = rows.map(x => x.t), bx = rows.map(x => x.b);
+  const vols = (chart.total_volumes || []).map(v => v[1]).filter(v => v > 0);
+  const n = px.length - 1;
+  const s50 = smaSeries(px, 50), s200 = smaSeries(px, 200), r50 = smaSeries(ratio, 50), r200 = smaSeries(ratio, 200);
+  const perf = {};
+  for(const d of [7, 30, 90, 365]){ const u = chg(px, d), b = chg(bx, d); perf[d] = { usd: u, btcUsd: b, vsBtc: chg(ratio, d) }; }
+  const m = {
+    at: Date.now(), ts, px, ratio, bx, r50, r200,
+    price: px[n], sma50: s50[n], sma200: s200[n], rsma50: r50[n], rsma200: r200[n],
+    rsi: rsi(px), macd: macd(px), perf,
+    vol7: avg(vols.slice(-7)), vol30: avg(vols.slice(-30)), days: px.length,
+    rs30: r && r.ch30 != null && r.med30 != null ? r.ch30 - r.med30 : null,
+    desc: (detail.description?.en || "").replace(/<[^>]+>/g, "").trim(),
+    categories: detail.categories || [], catName, homepage: detail.links?.homepage?.[0] || "",
+    twitter: detail.links?.twitter_screen_name || ""
+  };
+  m.volRatio = m.vol7 && m.vol30 ? m.vol7/m.vol30 : null;
+  // Börsen
+  const names = [...new Set((detail.tickers || []).map(t => t.market?.name).filter(Boolean))];
+  m.exCount = names.length;
+  m.major = names.filter(nm => MAJOR.some(k => nm.toLowerCase().includes(k)));
+  // Vergleich mit Konkurrenz (gleiche Kategorie)
+  m.peers = (peers || []).map(p => ({ id: p.id, sym: (p.symbol || "").toUpperCase(), name: p.name, mc: p.market_cap, ch30: p.price_change_percentage_30d_in_currency }));
+  const leader = m.peers.find(p => p.mc);
+  m.leaderX = leader && r && r.mc ? leader.mc / r.mc : null;
+  m.leader = leader || null;
+  // Score Trend vs BTC (0–10)
+  let b = 0;
+  if(m.rsma50 != null && ratio[n] > m.rsma50) b += 3;
+  if(m.rsma200 != null && ratio[n] > m.rsma200) b += 3;
+  if(m.rsma50 != null && m.rsma200 != null && m.rsma50 > m.rsma200) b += 2;
+  if(perf[90].vsBtc != null && perf[90].vsBtc > 0) b += 2;
+  if(m.rsma200 == null){ b = b * 10/5; } // junger Coin: nur 50-Tage-Linie + 90 Tage verfügbar
+  m.btcScore = clamp(b);
+  // Score Momentum (0–10)
+  let mo = 0;
+  const R = m.rsi;
+  if(R != null) mo += R > 72 ? 0.5 : R >= 65 ? 2 : R >= 50 ? 3 : R >= 40 ? 2 : R >= 30 ? 1.5 : 1;
+  if(m.macd){ if(m.macd.hist > 0) mo += 2; if(m.macd.hist > m.macd.prev) mo += 1; }
+  if(m.volRatio != null) mo += m.volRatio >= 1.5 ? 2.5 : m.volRatio >= 1.15 ? 2 : m.volRatio >= 0.9 ? 1 : 0.3;
+  if(m.rs30 != null) mo += m.rs30 > 10 ? 1.5 : m.rs30 > 0 ? 1 : 0;
+  m.momScore = clamp(mo);
+  m.late = lateCheck(m, r);
+  return m;
+}
+// Ist es schon zu spät?
+function lateCheck(m, r){
+  const above200 = m.sma200 ? m.price/m.sma200 - 1 : null;
+  const v90 = m.perf[90].vsBtc, v30 = m.perf[30].vsBtc, R = m.rsi;
+  const ratioNow = m.ratio[m.ratio.length-1];
+  const why = [];
+  if(R != null) why.push(`RSI ${num(R, 0)} ${R > 70 ? "(überkauft)" : R < 30 ? "(überverkauft)" : ""}`);
+  if(above200 != null) why.push(`${pct(above200, 100, true)} gegenüber der 200-Tage-Linie`);
+  if(v30 != null) why.push(`30 Tage gegen BTC: ${pct(v30, 100, true)}`);
+  if(v90 != null) why.push(`90 Tage gegen BTC: ${pct(v90, 100, true)}`);
+  if(r && r.ath != null) why.push(`${pct(r.ath, 1, true)} vom Allzeithoch`);
+  let lvl, t;
+  if((R != null && R > 75) || (above200 != null && above200 > 1) || (v90 != null && v90 > 1.5)){
+    lvl = "r"; t = "Wahrscheinlich zu spät – stark heiß gelaufen";
+  } else if((R != null && R > 68) || (above200 != null && above200 > 0.5) || (v30 != null && v30 > 0.5) || (v90 != null && v90 > 0.8)){
+    lvl = "y"; t = "Spät – Rücksetzer abwarten";
+  } else if(m.rsma50 != null && ratioNow < m.rsma50 && (m.rsma200 == null || ratioNow < m.rsma200) && m.macd && m.macd.hist < 0){
+    lvl = "y"; t = "Abwärtstrend gegen BTC – noch kein Einstiegssignal";
+  } else if(m.rsma50 != null && ratioNow > m.rsma50 && (m.rsma200 == null || ratioNow < m.rsma200 * 1.15) && (R == null || R < 65)){
+    lvl = "g"; t = "Früh – Trend gegen BTC dreht nach oben";
+  } else if(m.rsma50 != null && ratioNow > m.rsma50){
+    lvl = "g"; t = "Im Aufwärtstrend, nicht überhitzt";
+  } else { lvl = "na"; t = "Neutral – kein klares Signal"; }
+  return { lvl, t, why };
+}
+
+// ---------- Grafiken (SVG) ----------
+function radar(c){
+  const n = CATS.length, cx = 190, cy = 150, R = 92;
+  const pt = (i, v) => { const a = (-90 + i*360/n) * Math.PI/180; return [cx + Math.cos(a)*R*v/10, cy + Math.sin(a)*R*v/10]; };
+  let g = "";
+  for(const lv of [2, 4, 6, 8, 10]) g += `<polygon points="${CATS.map((_, i) => pt(i, lv).join(",")).join(" ")}" fill="none" stroke="#262b36"/>`;
+  CATS.forEach((_, i) => { const [x, y] = pt(i, 10); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#262b36"/>`; });
+  const poly = CATS.map(([k], i) => pt(i, c[k] ?? 0).join(",")).join(" ");
+  g += `<polygon points="${poly}" fill="rgba(59,130,246,.28)" stroke="#3b82f6" stroke-width="2"/>`;
+  CATS.forEach(([k, l], i) => {
+    const [x, y] = pt(i, c[k] ?? 0); if(c[k] != null) g += `<circle cx="${x}" cy="${y}" r="3" fill="#3b82f6"/>`;
+    const [lx, ly] = pt(i, 12.2); const anc = Math.abs(lx - cx) < 8 ? "middle" : lx > cx ? "start" : "end";
+    g += `<text x="${lx}" y="${ly}" font-size="11" fill="${c[k] == null ? "#5b6275" : "#c9cdd8"}" text-anchor="${anc}" dominant-baseline="middle">${l} ${c[k] == null ? "–" : f1(c[k])}</text>`;
+  });
+  return `<svg viewBox="0 0 380 300" width="100%" style="max-width:420px;display:block;margin:0 auto">${g}</svg>`;
+}
+function bars(c){
+  const col = v => v == null ? "#4b5263" : v >= 7 ? "var(--g)" : v >= 4 ? "var(--y)" : "var(--r)";
+  return `<div class="bars">${CATS.map(([k, l]) => `<div class="bl"><span>${l}</span><div class="track"><div class="fill" style="width:${(c[k] ?? 0)*10}%;background:${col(c[k])}"></div></div><span>${f1(c[k])}</span></div>`).join("")}</div>`;
+}
+function lineChart(series, opt = {}){
+  const W = 340, H = opt.h || 190, L = 44, Rr = 8, T = 22, B = 22;
+  const all = series.flatMap(s => s.pts.filter(p => p[1] != null));
+  if(!all.length) return `<div class="hint">Keine Chartdaten.</div>`;
+  const t0 = Math.min(...all.map(p => p[0])), t1 = Math.max(...all.map(p => p[0]));
+  let v0 = Math.min(...all.map(p => p[1])), v1 = Math.max(...all.map(p => p[1]));
+  if(v0 === v1){ v0 *= 0.95; v1 *= 1.05; }
+  const X = t => L + (t - t0)/(t1 - t0 || 1)*(W - L - Rr), Y = v => T + (1 - (v - v0)/(v1 - v0))*(H - T - B);
+  const fmt = opt.fmt || (v => num(v, 0));
+  let g = "";
+  for(let i = 0; i <= 3; i++){ const v = v0 + (v1 - v0)*i/3, y = Y(v); g += `<line x1="${L}" x2="${W-Rr}" y1="${y}" y2="${y}" stroke="#262b36"/><text x="${L-4}" y="${y}" font-size="9" fill="#8a91a3" text-anchor="end" dominant-baseline="middle">${fmt(v)}</text>`; }
+  for(const t of [t0, (t0 + t1)/2, t1]) g += `<text x="${X(t)}" y="${H-6}" font-size="9" fill="#8a91a3" text-anchor="${t === t0 ? "start" : t === t1 ? "end" : "middle"}">${dstr(t)}</text>`;
+  if(opt.base != null) g += `<line x1="${L}" x2="${W-Rr}" y1="${Y(opt.base)}" y2="${Y(opt.base)}" stroke="#5b6275" stroke-dasharray="3 3"/>`;
+  let lx = L;
+  for(const s of series){
+    const d = s.pts.filter(p => p[1] != null).map((p, i) => (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1)).join(" ");
+    g += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="${s.w || 1.8}" ${s.dash ? `stroke-dasharray="${s.dash}"` : ""}/>`;
+    g += `<rect x="${lx}" y="5" width="10" height="3" fill="${s.color}"/><text x="${lx + 13}" y="8" font-size="9.5" fill="#c9cdd8" dominant-baseline="middle">${s.name}</text>`;
+    lx += 22 + s.name.length*5.8;
+  }
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%">${g}</svg>`;
+}
+function unlockChart(list){
+  if(!list.length) return "";
+  const mx = Math.max(5, ...list.map(u => +u.pct_circ || 0));
+  return `<div class="bars" style="margin-top:8px">${list.slice(0, 12).map(u => {
+    const p = +u.pct_circ || 0, c = p >= 2 ? "var(--r)" : p >= 1 ? "var(--y)" : "var(--g)";
+    return `<div class="bl"><span>${dstr(u.t)}</span><div class="track"><div class="fill" style="width:${p/mx*100}%;background:${c}"></div></div><span style="width:52px">${num(p)} %</span></div>`;
+  }).join("")}</div><div class="hint">Balken = Anteil vom aktuellen Umlauf, der an dem Tag frei wird (rot ab 2 %).</div>`;
 }
 
 // ---------- Liste ----------
+function sizeClass(mc){
+  if(!mc) return ["–", "na"];
+  if(mc >= 10e9) return ["Large Cap", "g"]; if(mc >= 1e9) return ["Mid Cap", "g"];
+  if(mc >= 100e6) return ["Small Cap", "y"]; return ["Micro Cap", "r"];
+}
 function render(){
   const list = $("#list");
-  if(stamp) $("#stat").textContent = `${results.length} Altcoins · Stand ${new Date(stamp).toLocaleString("de-DE",{dateStyle:"short",timeStyle:"short"})}`;
+  if(stamp) $("#stat").textContent = `${results.length} Altcoins · Stand ${new Date(stamp).toLocaleString("de-DE",{dateStyle:"short",timeStyle:"short"})} · ✓ = komplett geprüft`;
   if(!results.length){ list.innerHTML = `<div class="empty">Tippe auf ↻, um die Coins zu laden.</div>`; return; }
   const q = $("#q").value.trim().toLowerCase(), key = $("#sort").value;
-  let rows = results.map(withDeep).filter(r => !q || r.sym.toLowerCase().includes(q) || (r.name || "").toLowerCase().includes(q));
-  rows.sort((a, b) => key === "rank" ? (a.rank || 1e9) - (b.rank || 1e9) : (b[key] ?? -1) - (a[key] ?? -1));
+  let rows = results.map(r => {
+    const ls = listScore(r), fs = full[r.id];
+    const btc30 = r.ch30 != null && btcRow && btcRow.ch30 != null ? ((1 + r.ch30/100)/(1 + btcRow.ch30/100) - 1)*100 : null;
+    return { ...r, ls, fs, score: fs ? fs.score : ls, tok: (r.s2 + r.s4)/20, btc30 };
+  }).filter(r => !q || r.sym.toLowerCase().includes(q) || (r.name || "").toLowerCase().includes(q));
+  rows.sort((a, b) => key === "rank" ? (a.rank || 1e9) - (b.rank || 1e9) : (b[key] ?? -1e9) - (a[key] ?? -1e9));
   rows = rows.slice(0, 300);
-  list.innerHTML = rows.map(r => `
-    <div class="coin" data-id="${esc(r.id)}">
+  const pill = (v, l, isPct) => `<div class="pill ${isPct ? (v == null ? "na" : v > 5 ? "g" : v > -5 ? "y" : "r") : cls10(v)}">${isPct ? pct(v, 1, true) : f1(v)}<small>${l}</small></div>`;
+  list.innerHTML = rows.map(r => {
+    const [sz, szc] = sizeClass(r.mc);
+    return `<div class="coin" data-id="${esc(r.id)}">
       <div class="row1">
-        <div class="grow"><div class="sym">${esc(r.sym)} <span class="nm">#${r.rank || "–"}</span></div><div class="nm">${esc(r.name)}</div></div>
-        <div class="big ${cls(r.score)}">${r.score}</div>
+        ${r.img ? `<img class="logo" src="${esc(r.img)}" alt="" loading="lazy">` : `<div class="logo"></div>`}
+        <div class="grow"><div class="sym">${esc(r.sym)} <span class="nm">#${r.rank || "–"}</span> <span class="tag ${szc}">${sz}</span></div><div class="nm">${esc(r.name)}</div></div>
+        <div class="big ${cls10(r.score)}">${f1(r.score)}${r.fs ? " ✓" : ""}<small>${r.fs ? "komplett" : "Fundament"}</small></div>
       </div>
-      <div class="pills">
-        ${[["s1","Umsatz"],["s2","Capture"],["s3","Utility"],["s4","Supply"],["s5","Katal."]].map(([k,l]) =>
-          `<div class="pill ${cls(r[k])}">${r[k] ?? "–"}<small>${l}</small></div>`).join("")}
-      </div>
+      <div class="pills">${pill(r.s1/10, "Umsatz")}${pill(r.tok, "Tokenomics")}${pill(r.s3/10, "Utility")}${pill(r.btc30, "30T vs BTC", true)}</div>
       <div class="meta"><span>MC ${usd(r.mc)}</span><span>Umsatz/J ${usd(r.revY)}</span><span>Umlauf ${pct(r.circ,100)}</span></div>
-    </div>`).join("") || `<div class="empty">Kein Coin gefunden.</div>`;
+    </div>`;
+  }).join("") || `<div class="empty">Kein Coin gefunden.</div>`;
 }
 
 // ---------- Detail ----------
 function openDetail(id, push = true){
-  const base = results.find(x => x.id === id); if(!base) return;
-  const r = withDeep(base), d = deep[id];
-  const kv = (k, v) => `<div class="kv"><span>${k}</span><span>${v}</span></div>`;
-  const sec = (title, s, body) => `<div class="sec"><h3>${title}<span class="pill ${cls(s)}" style="padding:2px 8px">${s ?? "–"}</span></h3>${body}</div>`;
-  const ans = k => d && d[k] ? `<div class="ans"><b>KI:</b> ${esc(d[k].answer)}</div>` : "";
-
-  let h = `<div class="dh"><button class="ib" id="bBack">‹ Zurück</button><div class="grow"><div class="sym">${esc(r.sym)}</div><div class="nm">${esc(r.name)}</div></div><div class="big ${cls(r.score)}">${r.score}</div></div>`;
-  h += `<div class="sec">${kv("Kurs", usd(r.price))}${kv("Market Cap", usd(r.mc))}${kv("FDV", usd(r.fdv) + " (×" + num(r.fdvmc,2) + ")")}${kv("Kurs 30 Tage", pct(r.ch30))}</div>`;
-  h += sec("1 · Real Revenue", r.s1, kv("Umsatz/Jahr", usd(r.revY)) + kv("P/S (MC ÷ Umsatz)", num(r.ps)) + (r.src.length ? kv("Quelle", esc(r.src.slice(0,3).join(", "))) : "") + ans("q1"));
-  h += sec("2 · Value Capture", r.s2, kv("An Holder/Jahr", usd(r.holdY)) + kv("Holder-Rendite", pct(r.hy)) + kv("Anteil vom Umsatz", pct(r.cap,100)) + ans("q2"));
-  h += sec("3 · Real Utility", r.s3, kv("Gebühren/Jahr", usd(r.feesY)) + kv("TVL", usd(r.tvl)) + ans("q3"));
-  let s4 = kv("Im Umlauf", pct(r.circ,100)) + ans("q4");
-  if(d && d.q4 && Array.isArray(d.q4.next_unlocks) && d.q4.next_unlocks.length)
-    s4 += `<table class="mini"><tr><th>Datum</th><th>Menge</th><th>% Umlauf</th><th>An</th></tr>${d.q4.next_unlocks.map(u =>
-      `<tr><td>${esc(u.date)}</td><td>${esc(u.amount)}</td><td>${esc(u.pct_circ)}</td><td>${esc(u.recipient)}</td></tr>`).join("")}</table>`;
-  h += sec("4 · Supply & Unlocks", r.s4, s4);
-  let s5 = d ? ans("q5") : `<div class="ans" style="color:var(--mut)">Nur per KI-Recherche (Button unten).</div>`;
-  if(d && d.q5 && Array.isArray(d.q5.catalysts) && d.q5.catalysts.length)
-    s5 += `<table class="mini"><tr><th>Wann</th><th>Ereignis</th><th>Wirkung</th></tr>${d.q5.catalysts.map(c =>
-      `<tr><td>${esc(c.date)}</td><td>${esc(c.event)}</td><td>${esc(c.impact)}</td></tr>`).join("")}</table>`;
-  h += sec("5 · Katalysatoren", r.s5, s5);
-  if(r.notes.length) h += `<div class="sec">${r.notes.map(n => `<div class="note">⚠ ${esc(n)}</div>`).join("")}</div>`;
-  if(d){
-    if(Array.isArray(d.red_flags) && d.red_flags.length) h += `<div class="sec"><h3>Red Flags</h3>${d.red_flags.map(f => `<div class="note">⚠ ${esc(f)}</div>`).join("")}</div>`;
-    if(d.fazit) h += `<div class="sec"><h3>Fazit</h3><div class="ans">${esc(d.fazit)}</div>${d._date ? `<div class="hint">Recherche vom ${esc(d._date)}</div>` : ""}</div>`;
-    if(Array.isArray(d.sources) && d.sources.length) h += `<div class="sec links"><h3>Quellen</h3>${d.sources.filter(s => /^https?:/.test(s)).map((s,i) => `<a href="${esc(s)}" target="_blank" rel="noopener">[${i+1}] ${esc(new URL(s).hostname)}</a>`).join(" ")}</div>`;
+  const r = results.find(x => x.id === id); if(!r) return;
+  cur = { id, mode: (cur && cur.id === id) ? cur.mode : "btc", range: (cur && cur.id === id) ? cur.range : 365, err: cur && cur.id === id ? cur.err : {} };
+  $("#detail").classList.add("open");
+  if(push){ history.pushState({ d: id }, ""); $("#detail").scrollTop = 0; }
+  renderDetail();
+  if(!mem.mkt[id]){
+    loadMarket(id).then(() => { if(cur && cur.id === id) renderDetail(); })
+      .catch(e => { if(cur && cur.id === id){ cur.err.mkt = e.message; renderDetail(); } });
   }
-  h += `<div class="sec links"><a href="https://www.coingecko.com/de/munze/${esc(r.id)}" target="_blank" rel="noopener">CoinGecko</a><a href="https://defillama.com/unlocks" target="_blank" rel="noopener">DefiLlama Unlocks</a><a href="https://tokenomist.ai" target="_blank" rel="noopener">Tokenomist</a></div>`;
-  h += `<div id="dErr"></div><button class="btn" id="bDeep">${d ? "KI-Recherche erneuern" : "KI-Recherche starten (alle 5 Fragen)"}</button>`;
-  h += `<div class="disc">Keine Anlageberatung.</div>`;
-  const el = $("#detail"); el.innerHTML = h; el.classList.add("open"); el.scrollTop = 0;
-  if(push) history.pushState({ d: id }, "");
-  $("#bBack").onclick = () => history.back();
-  $("#bDeep").onclick = () => runDeep(id);
+  if(settings.aKey && !bm[id] && !busy["bm" + id]) genBusinessModel(r);
 }
-function closeDetail(){ $("#detail").classList.remove("open"); render(); }
+function closeDetail(){ $("#detail").classList.remove("open"); cur = null; render(); }
 window.addEventListener("popstate", () => { if($("#detail").classList.contains("open")) closeDetail(); });
 
-// ---------- KI-Recherche ----------
-function prompt(r){
+function renderDetail(){
+  if(!cur) return;
+  const id = cur.id, r = results.find(x => x.id === id), d = deep[id], s = social[id], m = mem.mkt[id], man = manual[id] || {};
+  const S = scores(r), c = S.c;
+  const kv = (k, v) => `<div class="kv"><span>${k}</span><span>${v}</span></div>`;
+  const badge = v => `<span class="pill ${cls10(v)}" style="padding:2px 9px;font-size:13px">${f1(v)}</span>`;
+  const sec = (title, v, body) => `<div class="box"><h3><span>${title}</span>${badge(v)}</h3>${body}</div>`;
+  const ai = (txt, label = "KI") => txt ? `<div class="ans"><b>${label}:</b> ${esc(txt)}</div>` : "";
+  const wait = msg => `<div class="hint"><span class="spin sm"></span>${msg}</div>`;
+  const [sz, szc] = sizeClass(r.mc);
+  let h = "";
+
+  // Kopf
+  h += `<div class="dh"><button class="ib" id="bBack">‹ Zurück</button>
+    ${r.img ? `<img class="logo" src="${esc(r.img)}" alt="">` : ""}
+    <div class="grow"><div class="sym">${esc(r.sym)} <span class="tag ${szc}">${sz}</span></div><div class="nm">${esc(r.name)} · ${usd(r.price)}</div></div>
+    <div class="big ${cls10(S.overall)}">${f1(S.overall)}<small>von 10</small></div></div>`;
+
+  // Gesamtbild
+  h += `<div class="box"><h3><span>Gesamtbewertung</span><span class="hint">${S.complete ? "alle automatischen Punkte geprüft" : "vorläufig – KI-Analyse fehlt noch"}</span></h3>
+    <div class="radarWrap">${radar(c)}${bars(c)}</div>`;
+  if(m) h += `<div class="late ${m.late.lvl}"><b>Zu spät? ${esc(m.late.t)}</b><ul>${m.late.why.map(w => `<li>${esc(w)}</li>`).join("")}</ul></div>`;
+  else h += cur.err.mkt ? `<div class="err">Marktdaten: ${esc(cur.err.mkt)}</div>` : wait("Lade Chartdaten für den Zu-spät-Check …");
+  h += `</div>`;
+
+  // Warnsignale
+  h += `<div class="box"><h3><span>⚠ Warnsignale</span><span class="hint">${S.flags.filter(f => f.s === "r" && !f.info).length} rot</span></h3><div class="hint" style="margin-bottom:4px">🔴 trifft zu · 🟢 trifft nicht zu · ⚪ noch nicht geprüft</div>
+    ${S.flags.map(f => `<div class="flag"><div class="dot ${f.s}"></div><div><div>${esc(f.t)}</div><div class="hint">${f.x}</div></div></div>`).join("")}</div>`;
+
+  // Geschäftsmodell
+  h += `<div class="box"><h3><span>Geschäftsmodell</span></h3>`;
+  if(bm[id]) h += `<div class="ans" style="margin-top:0">${esc(bm[id].text)}</div><div class="hint">erstellt am ${esc(bm[id].date)}</div>`;
+  else if(busy["bm" + id]) h += wait("Geschäftsmodell wird erklärt …");
+  else if(cur.err.bm) h += `<div class="err">${esc(cur.err.bm)}</div><button class="btn alt" id="bBm">Nochmal versuchen</button>`;
+  else if(!settings.aKey) h += (m && m.desc ? `<div class="ans" style="margin-top:0">${esc(m.desc.slice(0, 700))}${m.desc.length > 700 ? " …" : ""}</div><div class="hint">Beschreibung von CoinGecko (Englisch). Mit Anthropic-Key unter ⚙︎ erscheint hier eine deutsche Erklärung.</div>` : `<div class="hint">Mit Anthropic-Key unter ⚙︎ wird hier das Geschäftsmodell erklärt.</div>`);
+  h += `</div>`;
+
+  // ===== A. Fundament =====
+  h += `<div class="grp">A · Fundament</div>`;
+  h += sec("1 · Real Revenue", c.rev,
+    kv("Umsatz pro Jahr", usd(r.revY)) + kv("Gebühren pro Jahr", usd(r.feesY)) + kv("P/S (Market Cap ÷ Umsatz)", num(r.ps)) +
+    (r.src.length ? kv("Quelle DefiLlama", esc(r.src.slice(0, 3).join(", "))) : "") + ai(d?.revenue?.answer));
+
+  let tk = `<div class="hint" style="margin-bottom:4px">Value Capture</div>` +
+    kv("An Holder pro Jahr (Buyback/Burn/Fee-Share)", usd(r.holdY)) + kv("Holder-Rendite", pct(r.hy)) + kv("Anteil vom Umsatz", pct(r.cap, 100)) +
+    ai(d?.tokenomics?.buyback_burn, "Buyback & Burn") +
+    `<div class="hint" style="margin:10px 0 4px">Angebot</div>` +
+    kv("Im Umlauf", pct(r.circ, 100)) + kv("Max-Angebot", r.maxSupply ? num(r.maxSupply, 0) : "unbegrenzt / unbekannt") +
+    kv("FDV", usd(r.fdv)) + kv("FDV ÷ Market Cap", r.fdvmc ? "×" + num(r.fdvmc, 2) : "–") +
+    kv("Inflation pro Jahr", d?.tokenomics?.inflation_pct_year != null ? pct(pnum(d.tokenomics.inflation_pct_year)) : "–") +
+    kv("Angebot unterm Strich", d?.tokenomics?.net_supply ? esc(d.tokenomics.net_supply) : "–") +
+    ai(d?.tokenomics?.supply, "Supply") +
+    `<div class="hint" style="margin:10px 0 4px">Anstehende Unlocks (12 Monate)</div>`;
+  const ul = unlocksOf(id).filter(u => u.t <= Date.now() + 366*DAY);
+  if(ul.length){
+    tk += unlockChart(ul) + `<table class="mini"><tr><th>Datum</th><th>Menge</th><th>Wert</th><th>% Umlauf</th><th>An</th></tr>${ul.map(u =>
+      `<tr><td>${dstr(u.t)}</td><td>${esc(u.tokens)}</td><td>${esc(u.usd)}</td><td>${num(+u.pct_circ)} %</td><td>${esc(u.recipient)}</td></tr>`).join("")}</table>`;
+  } else tk += `<div class="hint">${d ? "Keine anstehenden Unlocks gefunden." : "Kommt mit der KI-Analyse."}</div>`;
+  tk += ai(d?.tokenomics?.answer, "Fazit Tokenomics");
+  h += sec("2 · Tokenomics", c.tok, tk);
+
+  h += sec("3 · Real Utility", c.util, kv("Gebühren pro Jahr", usd(r.feesY)) + kv("TVL", usd(r.tvl)) + ai(d?.utility?.answer));
+
+  let kt = d ? ai(d.catalysts?.answer, "Überblick") : `<div class="hint">Kommt mit der KI-Analyse.</div>`;
+  if(Array.isArray(d?.catalysts?.items) && d.catalysts.items.length)
+    kt += `<table class="mini"><tr><th>Wann</th><th>Ereignis</th><th>Wirkung</th></tr>${d.catalysts.items.map(x =>
+      `<tr><td>${esc(x.date)}</td><td>${esc(x.event)}</td><td><span class="tag ${x.impact === "positiv" ? "g" : x.impact === "negativ" ? "r" : "na"}">${esc(x.impact)}</span></td></tr>`).join("")}</table>`;
+  h += sec("4 · Katalysatoren", c.kat, kt);
+
+  let mk = kv("Größenklasse", `${sz} (${usd(r.mc)})`) + kv("Bedeutung", szc === "g" ? "etabliert, weniger Risiko, weniger Hebel" : szc === "y" ? "mehr Potenzial, mehr Risiko" : sz === "Micro Cap" ? "sehr spekulativ, Pump-&-Dump-Gefahr" : "–") +
+    kv("FDV ÷ Market Cap", r.fdvmc ? "×" + num(r.fdvmc, 2) : "–") + kv("Liquidität (Volumen ÷ MC)", pct(r.liq, 100)) +
+    kv("TVL ÷ Market Cap", r.tvl && r.mc ? "×" + num(r.tvl/r.mc, 2) : "–");
+  if(m){
+    if(m.catName) mk += kv("Kategorie", esc(m.catName));
+    if(m.leader && m.leaderX) mk += kv("Bis zur Größe des Marktführers", m.leaderX <= 1.01 ? "ist selbst Marktführer" : `×${num(m.leaderX, 1)} (${esc(m.leader.sym)})`);
+    if(m.peers.length){
+      const pr = [...m.peers]; if(!pr.some(p => p.id === id)) pr.push({ id, sym: r.sym, mc: r.mc, ch30: r.ch30 });
+      mk += `<table class="mini"><tr><th>Konkurrenz</th><th>Market Cap</th><th>30 T</th></tr>${pr.map(p =>
+        `<tr class="${p.id === id ? "me" : ""}"><td>${esc(p.sym)}</td><td>${usd(p.mc)}</td><td>${pct(p.ch30, 1, true)}</td></tr>`).join("")}</table>`;
+    }
+  } else mk += wait("Lade Konkurrenzvergleich …");
+  h += sec("5 · Marktkapitalisierung & Bewertung", c.val, mk);
+
+  // ===== B. Markt & Timing =====
+  h += `<div class="grp">B · Markt & Timing</div>`;
+  if(m){
+    const cut = Date.now() - cur.range*DAY, idx = m.ts.map((t, i) => t >= cut ? i : -1).filter(i => i >= 0);
+    let chart;
+    if(idx.length < 2) chart = `<div class="hint">Zu wenig Kursdaten für diesen Zeitraum.</div>`;
+    else if(cur.mode === "btc"){
+      const base = m.ratio[idx[0]];
+      chart = lineChart([
+        { name: `${r.sym}/BTC`, color: "#3b82f6", pts: idx.map(i => [m.ts[i], m.ratio[i]/base*100]) },
+        { name: "Ø 50 T", color: "#eab308", w: 1.2, pts: idx.map(i => [m.ts[i], m.r50[i] != null ? m.r50[i]/base*100 : null]) },
+        { name: "Ø 200 T", color: "#ef4444", w: 1.2, pts: idx.map(i => [m.ts[i], m.r200[i] != null ? m.r200[i]/base*100 : null]) }
+      ], { base: 100 });
+    } else {
+      chart = lineChart([
+        { name: `${r.sym} in $`, color: "#3b82f6", pts: idx.map(i => [m.ts[i], m.px[i]/m.px[idx[0]]*100]) },
+        { name: "BTC in $", color: "#f7931a", pts: idx.map(i => [m.ts[i], m.bx[i]/m.bx[idx[0]]*100]) }
+      ], { base: 100 });
+    }
+    const P = m.perf;
+    let tb = `<table class="mini"><tr><th></th><th>7 T</th><th>30 T</th><th>90 T</th><th>1 J</th></tr>
+      <tr><td>${esc(r.sym)} in $</td>${[7,30,90,365].map(k => `<td>${pct(P[k].usd, 100, true)}</td>`).join("")}</tr>
+      <tr><td>BTC in $</td>${[7,30,90,365].map(k => `<td>${pct(P[k].btcUsd, 100, true)}</td>`).join("")}</tr>
+      <tr class="me"><td>gegen BTC</td>${[7,30,90,365].map(k => `<td>${pct(P[k].vsBtc, 100, true)}</td>`).join("")}</tr></table>`;
+    const rn = m.ratio[m.ratio.length-1];
+    h += sec("6 · Chart-Trend gegen BTC", c.btc,
+      `<div class="seg" id="segMode"><button data-v="btc" class="${cur.mode === "btc" ? "on" : ""}">Paar gegen BTC</button><button data-v="usd" class="${cur.mode === "usd" ? "on" : ""}">${esc(r.sym)} vs BTC in $</button></div>
+       <div class="seg" id="segRange"><button data-v="90" class="${cur.range === 90 ? "on" : ""}">90 Tage</button><button data-v="365" class="${cur.range === 365 ? "on" : ""}">1 Jahr</button></div>
+       ${chart}<div class="hint">Index = 100 am Startpunkt. Steigt die blaue Linie im BTC-Chart, entwickelt sich der Coin besser als Bitcoin.</div>${tb}` +
+      kv("Über 50-Tage-Linie (gegen BTC)", m.rsma50 == null ? "–" : rn > m.rsma50 ? "✅ ja" : "❌ nein") +
+      kv("Über 200-Tage-Linie (gegen BTC)", m.rsma200 == null ? "zu wenig Historie" : rn > m.rsma200 ? "✅ ja" : "❌ nein") +
+      kv("50 T über 200 T (gegen BTC)", m.rsma50 == null || m.rsma200 == null ? "–" : m.rsma50 > m.rsma200 ? "✅ ja (Aufwärtstrend)" : "❌ nein"));
+    h += sec("7 · Momentum, Volumen & relative Stärke", c.mom,
+      kv("RSI (14 Tage)", m.rsi == null ? "–" : `${num(m.rsi, 0)} · ${m.rsi > 70 ? "überkauft" : m.rsi < 30 ? "überverkauft" : m.rsi >= 50 ? "positiv" : "schwach"}`) +
+      kv("MACD", !m.macd ? "–" : `${m.macd.hist > 0 ? "über Signallinie ✅" : "unter Signallinie ❌"}${m.macd.hist > m.macd.prev ? " · dreht nach oben" : " · schwächer werdend"}`) +
+      kv("Volumen 7 T ÷ Ø 30 T", m.volRatio == null ? "–" : `×${num(m.volRatio, 2)} ${m.volRatio >= 1.5 ? "🔥 stark steigend" : m.volRatio >= 1.15 ? "steigend" : m.volRatio >= 0.9 ? "normal" : "fallend"}`) +
+      kv("Stärke vs. Gesamtmarkt (30 T)", m.rs30 == null ? "–" : `${m.rs30 > 0 ? "+" : ""}${num(m.rs30)} %-Punkte`) +
+      kv("Stärke vs. BTC (30 T)", pct(m.perf[30].vsBtc, 100, true)) +
+      `<div class="hint">Frühes Interesse: Volumen steigt deutlich, während der Kurs noch nicht überhitzt ist (RSI unter 65).</div>` +
+      (m.volRatio >= 1.3 && m.rsi != null && m.rsi < 65 ? `<div class="note" style="color:var(--gtx)">✅ Mögliches frühes Interesse: Volumen steigt, Kurs noch nicht heiß.</div>` : ""));
+  } else {
+    h += `<div class="box">${cur.err.mkt ? `<div class="err">Marktdaten konnten nicht geladen werden: ${esc(cur.err.mkt)}</div><button class="btn alt" id="bRetryMkt">Nochmal laden</button>` : wait("Lade Chart, Volumen und Indikatoren …")}</div>`;
+  }
+  let so = "";
+  if(s){
+    so += kv("Erwähnungen", esc(s.mentions_trend || "–")) + kv("Stimmung", esc(s.sentiment || "–")) +
+      kv("Frühes Interesse vor der Masse?", s.early_interest === true ? "✅ ja" : s.early_interest === false ? "nein" : "–") +
+      kv("Bots / bezahlte Werbung?", s.bot_or_paid_suspected === true ? "⚠ Verdacht" : s.bot_or_paid_suspected === false ? "kein Verdacht" : "–") +
+      ai(s.summary, "Grok") + (Array.isArray(s.top_accounts) && s.top_accounts.length ? `<div class="hint">Aktive Accounts: ${esc(s.top_accounts.slice(0, 6).join(", "))}</div>` : "") +
+      `<div class="hint">X-Analyse vom ${esc(s._date)}</div>`;
+  } else if(d?.social_fallback){
+    so += ai(d.social_fallback.answer, "Websuche (Claude)") + `<div class="hint">${cur.err.soc ? "Grok: " + esc(cur.err.soc) + " – " : ""}Für eine echte X-Analyse xAI-Key unter ⚙︎ eintragen.</div>`;
+  } else so += busy["soc" + id] ? wait("Grok durchsucht X … (bis zu 1 Minute)") : `<div class="hint">${cur.err.soc ? `<span style="color:var(--rtx)">Grok: ${esc(cur.err.soc)}</span><br>` : ""}Kommt mit der KI-Analyse${settings.xKey ? " (über Grok)" : " – für X direkt: xAI-Key unter ⚙︎"}.</div>`;
+  h += sec("8 · Social-Erwähnungen auf X", c.soc, so);
+
+  // KI-Analyse
+  h += `<div id="dErr">${cur.err.deep ? `<div class="err">KI-Analyse: ${esc(cur.err.deep)}</div>` : ""}</div>`;
+  const running = busy["deep" + id] || busy["soc" + id];
+  h += `<button class="btn" id="bDeep" ${running ? "disabled" : ""}>${running ? "Analyse läuft … (1–2 Minuten)" : d ? "KI-Analyse erneuern" : "KI-Analyse starten (Fundament + Social)"}</button>`;
+  if(d) h += `<div class="hint" style="text-align:center">Letzte Analyse: ${esc(d._date)}</div>`;
+
+  // ===== C. Checkliste =====
+  h += `<div class="grp">C · Deine Checkliste</div><div class="box">`;
+  if(!S.complete){
+    h += `<div class="lock">🔒 Wird freigeschaltet, sobald die automatischen Punkte (A + B) geprüft sind.<br><span class="hint">Dafür einmal die KI-Analyse starten.</span></div>`;
+  } else {
+    h += `<h3><span>Narrativ</span>${badge(c.nar)}</h3>`;
+    if(d?.narrative) h += `<div class="ans" style="margin-top:0"><b>Info:</b> ${esc(d.narrative)}</div>`;
+    h += `<div class="hint">Wie stark ist das Narrativ / der Sektor gerade? 1 = tot, 5 = sehr heiß und wachsend</div>
+      <div class="rate" id="rNar">${[1,2,3,4,5].map(v => `<button data-v="${v}" class="${man.narrative === v ? "on" : ""}">${v}</button>`).join("")}</div>
+      <h3 style="margin-top:16px"><span>Kenne ich den Coin aus einem Influencer-Call?</span></h3>
+      <div class="rate" id="rInf"><button data-v="1" class="${man.influencer === true ? "on" : ""}">Ja</button><button data-v="0" class="${man.influencer === false ? "on" : ""}">Nein</button></div>
+      <div class="hint">„Ja“ zieht 1 Punkt von der Gesamtbewertung ab.</div>`;
+  }
+  h += `</div>`;
+
+  // Quellen
+  if(Array.isArray(d?.sources) && d.sources.length)
+    h += `<div class="box links"><h3>Quellen</h3>${d.sources.filter(x => /^https?:/.test(x)).map((x, i) => { let host = x; try{ host = new URL(x).hostname; }catch(_){ } return `<a href="${esc(x)}" target="_blank" rel="noopener">[${i+1}] ${esc(host)}</a>`; }).join("")}</div>`;
+  if(Array.isArray(d?.red_flags) && d.red_flags.filter(Boolean).length)
+    h += `<div class="box"><h3>Weitere Risiken (KI)</h3>${d.red_flags.filter(Boolean).map(f => `<div class="note">⚠ ${esc(f)}</div>`).join("")}</div>`;
+  if(d?.fazit) h += `<div class="box"><h3>Fazit</h3><div class="ans" style="margin-top:0">${esc(d.fazit)}</div></div>`;
+  h += `<div class="box links"><a href="https://www.coingecko.com/de/munze/${esc(id)}" target="_blank" rel="noopener">CoinGecko</a><a href="https://defillama.com/unlocks" target="_blank" rel="noopener">DefiLlama Unlocks</a><a href="https://tokenomist.ai" target="_blank" rel="noopener">Tokenomist</a>${m && m.twitter ? `<a href="https://x.com/${esc(m.twitter)}" target="_blank" rel="noopener">X @${esc(m.twitter)}</a>` : ""}${m && m.homepage ? `<a href="${esc(m.homepage)}" target="_blank" rel="noopener">Website</a>` : ""}</div>`;
+  h += `<div class="disc">Keine Anlageberatung. Daten: CoinGecko, DefiLlama, KI-Recherche (kann Fehler enthalten).</div>`;
+
+  const keepScroll = $("#detail").scrollTop;
+  $("#dIn").innerHTML = h;
+  $("#detail").scrollTop = keepScroll;
+
+  // Gesamtwert für die Liste merken
+  if(S.complete && S.overall != null){ full[id] = { score: S.overall, date: new Date().toLocaleDateString("de-DE") }; store.set("ac_full", full); }
+
+  // Events
+  $("#bBack").onclick = () => history.back();
+  $("#bDeep").onclick = () => runAnalysis(id);
+  const bb = $("#bBm"); if(bb) bb.onclick = () => { cur.err.bm = null; genBusinessModel(r); };
+  const br = $("#bRetryMkt"); if(br) br.onclick = () => { cur.err.mkt = null; renderDetail(); loadMarket(id).then(renderDetail).catch(e => { cur.err.mkt = e.message; renderDetail(); }); };
+  const sm = $("#segMode"); if(sm) sm.onclick = e => { const v = e.target.dataset.v; if(v){ cur.mode = v; renderDetail(); } };
+  const sr = $("#segRange"); if(sr) sr.onclick = e => { const v = e.target.dataset.v; if(v){ cur.range = +v; renderDetail(); } };
+  const rn = $("#rNar"); if(rn) rn.onclick = e => { const v = +e.target.dataset.v; if(v){ manual[id] = { ...man, narrative: v }; store.set("ac_manual", manual); renderDetail(); } };
+  const ri = $("#rInf"); if(ri) ri.onclick = e => { const v = e.target.dataset.v; if(v != null){ manual[id] = { ...man, influencer: v === "1" }; store.set("ac_manual", manual); renderDetail(); } };
+}
+
+// ---------- KI ----------
+async function claude(prompt, maxUses, maxTokens){
+  const res = await fetchT("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-api-key": settings.aKey, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+    body: JSON.stringify({ model: settings.model, max_tokens: maxTokens,
+      tools: [{ type: "web_search_20250305", name: "web_search", max_uses: maxUses }],
+      messages: [{ role: "user", content: prompt }] })
+  }, 240000);
+  const j = await res.json().catch(() => ({}));
+  if(!res.ok) throw new Error((j.error && j.error.message) || "HTTP " + res.status);
+  return (j.content || []).filter(x => x.type === "text").map(x => x.text).join("");
+}
+async function grok(prompt){
+  let res;
+  try{
+    res = await fetchT("https://api.x.ai/v1/responses", {
+      method: "POST",
+      headers: { "content-type": "application/json", "authorization": "Bearer " + settings.xKey },
+      body: JSON.stringify({ model: settings.xModel, input: [{ role: "user", content: prompt }], tools: [{ type: "x_search" }] })
+    }, 240000);
+  }catch(e){
+    throw new Error(e.name === "AbortError" ? "Zeitüberschreitung" : "Grok lässt keine Anfragen direkt aus dem Browser zu (CORS) – Social läuft dann über die Websuche");
+  }
+  const j = await res.json().catch(() => ({}));
+  if(!res.ok) throw new Error((j.error && (j.error.message || j.error)) || j.message || "HTTP " + res.status);
+  let t = j.output_text || "";
+  if(!t) for(const o of (j.output || [])) if(o.type === "message") for(const c of (o.content || [])) if(c.text) t += c.text;
+  return t;
+}
+function metrics(r){
+  const m = mem.mkt[r.id];
+  return [`- Kurs ${usd(r.price)}, Market Cap ${usd(r.mc)}, FDV ${usd(r.fdv)}, Rang #${r.rank}`,
+    `- Gebühren/Jahr ${usd(r.feesY)}, Protokoll-Umsatz/Jahr ${usd(r.revY)}, Holders Revenue/Jahr ${usd(r.holdY)}, TVL ${usd(r.tvl)}`,
+    `- Im Umlauf ${pct(r.circ, 100)} des Endangebots, Max-Supply ${r.maxSupply ? num(r.maxSupply, 0) : "keiner/unbekannt"}`,
+    m ? `- Kategorie: ${m.catName || "?"}; gelistet auf: ${m.major.join(", ") || "keiner großen Börse"} (${m.exCount} Handelsplätze)` : ""].join("\n");
+}
+async function genBusinessModel(r){
+  const id = r.id; busy["bm" + id] = true; if(cur && cur.id === id) renderDetail();
+  try{
+    const t = await claude(`Erkläre auf Deutsch in 5–7 einfachen Sätzen das Geschäftsmodell von ${r.name} (${r.sym}, CoinGecko-ID "${id}"):
+Was macht das Projekt? Wer sind die Kunden/Nutzer und wofür zahlen sie? Wie verdient das Projekt Geld? Welche Rolle spielt der Token dabei (nur Spekulation, Gebühren, Governance, Staking, Sicherheit …)?
+Nutze die Websuche, wenn du dir nicht sicher bist. Schreibe für Einsteiger, ohne Marketing-Sprache, ohne Überschriften und ohne Aufzählungen. Antworte nur mit dem Text.`, 3, 1200);
+    bm[id] = { text: t.trim(), date: new Date().toLocaleDateString("de-DE") }; store.set("ac_bm", bm);
+  }catch(e){ if(cur && cur.id === id) cur.err.bm = "Geschäftsmodell: " + e.message; }
+  busy["bm" + id] = false;
+  if(cur && cur.id === id) renderDetail();
+}
+function deepPrompt(r){
   return `Du bist ein sorgfältiger Krypto-Fundamentalanalyst. Recherchiere mit der Websuche aktuell (heute ist ${new Date().toLocaleDateString("de-DE")}) den Coin **${r.name} (${r.sym})**, CoinGecko-ID "${r.id}".
 
 Bekannte Kennzahlen (DefiLlama/CoinGecko, evtl. lückenhaft):
-- Market Cap ${usd(r.mc)}, FDV ${usd(r.fdv)}
-- Gebühren/Jahr ${usd(r.feesY)}, Protokoll-Umsatz/Jahr ${usd(r.revY)}, Holders Revenue/Jahr ${usd(r.holdY)}, TVL ${usd(r.tvl)}
-- Umlauf/Endangebot ${pct(r.circ,100)}
+${metrics(r)}
 
-Beantworte diese 5 Fragen knapp, faktenbasiert, mit Zahlen:
-1. Real Revenue: Erzielt das Projekt echten Umsatz? Woher? Wie hoch, Trend?
-2. Value Capture: Fließt der Umsatz zum Token (Buyback, Burn, Fee-Share)? Wie viel %, seit wann, beschlossen oder nur geplant?
-3. Real Utility: Wofür wird Token/Produkt real genutzt? Nutzer, Aktivität, Abhängigkeit von Incentives?
-4. Supply & Token Unlocks: Umlauf vs. Gesamtangebot, Inflation, nächste große Unlocks (Datum, Menge, % vom Umlauf, Empfänger).
-5. Kommende Katalysatoren (6–12 Monate): Kooperationen, Upgrades, Listings, ETF, Regulierung, Veränderungen im Marktumfeld – positiv wie negativ.
+Prüfe genau, knapp und mit Zahlen:
+1. REVENUE: Erzielt das Projekt echten Umsatz? Woher? Wie hoch, Trend?
+2. TOKENOMICS:
+   a) Rückkauf (Buyback) und Burn: Gibt es sie? Wie viel % vom Umsatz, seit wann, beschlossen oder nur geplant?
+   b) Angebot: Anteil im Umlauf, FDV, jährliche Inflation/Emission in %.
+   c) Anstehende Unlocks der nächsten 12 Monate: genaues Datum, Menge in Tokens, Wert in $, % vom aktuellen Umlauf, Empfänger (Team, Investoren, Ökosystem …). Quellen z. B. Tokenomist, DefiLlama Unlocks, CryptoRank, Projekt-Doku.
+   d) Halten Team und Insider (Team + Investoren + Foundation) die Mehrheit des Angebots?
+   e) Wird das Angebot unterm Strich knapper (Burn/Buyback > neue Tokens) oder größer?
+3. UTILITY: Wofür wird Token/Produkt real genutzt? Nutzer, Aktivität, Abhängigkeit von Incentives?
+4. KATALYSATOREN (6–12 Monate): Kooperationen, Upgrades, Listings, ETF, Regulierung, Veränderungen im Marktumfeld – positiv und negativ, mit Datum falls bekannt.
+5. NARRATIV: Zu welchem Narrativ/Sektor gehört der Coin (z. B. AI, RWA, DePIN, DeFi, Gaming) und wie stark ist dieses Narrativ gerade?
+6. SOCIAL (grob über Websuche): Wie viel und wie wird gerade über den Coin gesprochen (X, Reddit, News)? Steigt das Interesse?
 
-Bewerte jede Frage 0–10 (10 = sehr stark für Token-Holder). Erfinde nichts; wenn nicht gefunden, schreibe "nicht gefunden".
-Antworte NUR mit JSON:
-{"q1":{"score":0,"answer":""},"q2":{"score":0,"answer":""},"q3":{"score":0,"answer":""},
-"q4":{"score":0,"answer":"","next_unlocks":[{"date":"","amount":"","pct_circ":"","recipient":""}]},
-"q5":{"score":0,"answer":"","catalysts":[{"date":"","event":"","impact":"positiv|negativ|unklar"}]},
-"red_flags":[""],"fazit":"","sources":["https://..."]}`;
+Bewerte mit 0–10 (10 = sehr gut für Token-Holder). Erfinde nichts; wenn du etwas nicht findest, schreibe "nicht gefunden" bzw. null.
+Antworte NUR mit JSON in genau diesem Format:
+{"revenue":{"score":0,"answer":""},
+"tokenomics":{"score":0,"buyback_burn":"","has_value_capture":true,"supply":"","inflation_pct_year":null,"insider_share_pct":null,"insider_majority":null,"large_unlock_30d":false,"net_supply":"schrumpfend|stabil|wachsend|unklar","unlocks":[{"date":"YYYY-MM-DD","tokens":"","usd":"","pct_circ":0.0,"recipient":""}],"answer":""},
+"utility":{"score":0,"answer":""},
+"catalysts":{"score":0,"answer":"","items":[{"date":"","event":"","impact":"positiv|negativ|unklar"}]},
+"narrative":"",
+"social_fallback":{"score":0,"answer":""},
+"red_flags":[""],"fazit":"2–3 Sätze","sources":["https://..."]}`;
 }
-
-async function runDeep(id){
+function socialPrompt(r){
+  const m = mem.mkt[r.id];
+  return `Analysiere mit der X-Suche die Posts der letzten 30 Tage über den Krypto-Coin ${r.name} ($${r.sym})${m && m.twitter ? `, offizieller Account @${m.twitter}` : ""}.
+Fragen: Steigt die Zahl der Erwähnungen? Wie ist die Stimmung? Gibt es frühes Interesse von glaubwürdigen Accounts, bevor die breite Masse aufspringt? Gibt es Anzeichen für Bots, bezahlte Influencer-Werbung oder Pump-Gruppen?
+Bewerte das Social-Momentum mit 0–10 (10 = stark wachsendes, echtes Interesse; Hype durch Bots/bezahlte Posts zählt negativ).
+Antworte NUR mit JSON: {"score":0,"mentions_trend":"steigend|stabil|fallend","sentiment":"positiv|neutral|negativ|gemischt","early_interest":false,"bot_or_paid_suspected":false,"summary":"3–4 Sätze auf Deutsch","top_accounts":["@..."]}`;
+}
+async function runAnalysis(id){
   const r = results.find(x => x.id === id);
-  const errBox = $("#dErr");
-  if(!settings.aKey){
-    errBox.innerHTML = `<div class="err">Für die KI-Recherche brauchst du einen Anthropic-API-Key. Trag ihn unter ⚙︎ Einstellungen ein.</div>`;
-    return;
+  if(!settings.aKey && !settings.xKey){ cur.err.deep = "Bitte zuerst unter ⚙︎ einen Anthropic-API-Key eintragen (und optional einen xAI-Key für X)."; renderDetail(); return; }
+  cur.err.deep = null; cur.err.soc = null;
+  if(!mem.mkt[id]){ try{ await loadMarket(id); }catch(_){ } }
+  const jobs = [];
+  if(settings.aKey){
+    busy["deep" + id] = true;
+    jobs.push(claude(deepPrompt(r), 10, 6000).then(t => {
+      const p = parseJ(t) || { fazit: t.trim().slice(0, 3000) };
+      p._date = new Date().toLocaleDateString("de-DE"); deep[id] = p; store.set("ac_deep2", deep);
+    }).catch(e => { if(cur && cur.id === id) cur.err.deep = e.message; }).finally(() => { busy["deep" + id] = false; if(cur && cur.id === id) renderDetail(); }));
+    if(!bm[id] && !busy["bm" + id]) genBusinessModel(r);
+  } else cur.err.deep = "Ohne Anthropic-Key fehlen Revenue/Tokenomics/Katalysatoren aus der Recherche.";
+  if(settings.xKey){
+    busy["soc" + id] = true;
+    jobs.push(grok(socialPrompt(r)).then(t => {
+      const p = parseJ(t); if(!p) throw new Error("Antwort nicht lesbar");
+      p._date = new Date().toLocaleDateString("de-DE"); social[id] = p; store.set("ac_social", social);
+    }).catch(e => { if(cur && cur.id === id) cur.err.soc = e.message; }).finally(() => { busy["soc" + id] = false; if(cur && cur.id === id) renderDetail(); }));
   }
-  const b = $("#bDeep"); b.disabled = true; b.textContent = "Recherchiere … (ca. 1 Minute)";
-  errBox.innerHTML = "";
-  try{
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "content-type": "application/json", "x-api-key": settings.aKey,
-        "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
-      body: JSON.stringify({ model: settings.model, max_tokens: 4000,
-        tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 8 }],
-        messages: [{ role: "user", content: prompt(r) }] })
-    });
-    const j = await res.json();
-    if(!res.ok) throw new Error((j.error && j.error.message) || ("HTTP " + res.status));
-    const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("");
-    const a = text.indexOf("{"), z = text.lastIndexOf("}");
-    let parsed;
-    try{ parsed = JSON.parse(text.slice(a, z + 1)); }catch(_){ parsed = { fazit: text.trim().slice(0, 3000) }; }
-    parsed._date = new Date().toLocaleDateString("de-DE");
-    deep[id] = parsed; store.set("ac_deep", deep);
-    openDetail(id, false);
-  }catch(e){
-    errBox.innerHTML = `<div class="err">Fehler: ${esc(e.message)}</div>`;
-    b.disabled = false; b.textContent = "Nochmal versuchen";
-  }
+  renderDetail();
+  await Promise.all(jobs);
 }
 
 // ---------- Einstellungen ----------
 function openSettings(){
-  const el = $("#detail");
-  el.innerHTML = `<div class="dh"><button class="ib" id="bBack">‹ Zurück</button><div class="grow sym">Einstellungen</div></div>
+  cur = null;
+  $("#dIn").innerHTML = `<div class="dh"><button class="ib" id="bBack">‹ Zurück</button><div class="grow sym">Einstellungen</div></div>
   <div class="field"><label>Anzahl Coins (nach Market Cap)</label>
     <select id="sTop">${[100,250,500].map(n => `<option ${n == settings.top ? "selected" : ""}>${n}</option>`).join("")}</select></div>
-  <div class="field"><label>CoinGecko Demo-API-Key (optional)</label><input id="sCg" value="${esc(settings.cgKey)}" placeholder="CG-…" autocomplete="off">
-    <div class="hint">Kostenlos auf coingecko.com/de/api – hilft, wenn „Rate-Limit“ kommt.</div></div>
-  <div class="field"><label>Anthropic-API-Key (für KI-Recherche)</label><input id="sAk" type="password" value="${esc(settings.aKey)}" placeholder="sk-ant-…" autocomplete="off">
-    <div class="hint">Von console.anthropic.com. Bleibt nur auf deinem Handy gespeichert. Kostet pro Recherche ein paar Cent.</div></div>
-  <div class="field"><label>KI-Modell</label><input id="sModel" value="${esc(settings.model)}"></div>
+  <div class="field"><label>CoinGecko Demo-API-Key (empfohlen)</label><input id="sCg" value="${esc(settings.cgKey)}" placeholder="CG-…" autocomplete="off">
+    <div class="hint">Kostenlos auf coingecko.com/de/api. Macht die Detailansicht deutlich schneller und verhindert „Rate-Limit“.</div></div>
+  <div class="field"><label>Anthropic-API-Key (KI-Analyse & Geschäftsmodell)</label><input id="sAk" type="password" value="${esc(settings.aKey)}" placeholder="sk-ant-…" autocomplete="off">
+    <div class="hint">Von console.anthropic.com. Bleibt nur auf diesem Gerät. Ca. 5–20 Cent pro Coin-Analyse.</div></div>
+  <div class="field"><label>Claude-Modell</label><input id="sModel" value="${esc(settings.model)}"></div>
+  <div class="field"><label>xAI-API-Key (Grok, für X-Analyse)</label><input id="sXk" type="password" value="${esc(settings.xKey)}" placeholder="xai-…" autocomplete="off">
+    <div class="hint">Von console.x.ai. Optional – ohne Key schätzt Claude die Social-Lage über die Websuche.</div></div>
+  <div class="field"><label>Grok-Modell</label><input id="sXm" value="${esc(settings.xModel)}"></div>
   <button class="btn" id="bSave">Speichern</button>
-  <button class="btn alt" id="bClear">KI-Ergebnisse löschen</button>
-  <div class="disc">Daten: CoinGecko, DefiLlama · Keine Anlageberatung.</div>`;
-  el.classList.add("open"); history.pushState({ s: 1 }, "");
+  <button class="btn alt" id="bClear">Alle KI-Ergebnisse & Bewertungen löschen</button>
+  <div class="disc">Daten: CoinGecko, DefiLlama · KI: Claude, Grok · Keine Anlageberatung.</div>`;
+  $("#detail").classList.add("open"); $("#detail").scrollTop = 0; history.pushState({ s: 1 }, "");
   $("#bBack").onclick = () => history.back();
   $("#bSave").onclick = () => {
-    settings = { top: +$("#sTop").value, cgKey: $("#sCg").value.trim(), aKey: $("#sAk").value.trim(), model: $("#sModel").value.trim() || "claude-sonnet-5-5" };
+    settings = { top: +$("#sTop").value, cgKey: $("#sCg").value.trim(), aKey: $("#sAk").value.trim(), model: $("#sModel").value.trim() || "claude-sonnet-5-5",
+      xKey: $("#sXk").value.trim(), xModel: $("#sXm").value.trim() || "grok-4.5" };
     store.set("ac_settings", settings); history.back();
   };
-  $("#bClear").onclick = () => { deep = {}; store.set("ac_deep", deep); history.back(); };
+  $("#bClear").onclick = () => {
+    for(const o of [deep, social, bm, manual, full]) for(const k in o) delete o[k];
+    ["ac_deep2","ac_social","ac_bm","ac_manual","ac_full"].forEach(k => store.set(k, {}));
+    history.back();
+  };
 }
 
 // ---------- Start ----------
 $("#bRefresh").onclick = () => loadAll().catch(e => { loading(false);
-  $("#list").innerHTML = `<div class="err">Laden fehlgeschlagen: ${esc(e.message)}. Prüfe die Internetverbindung oder warte eine Minute (Rate-Limit).</div>` + $("#list").innerHTML; });
+  $("#list").insertAdjacentHTML("afterbegin", `<div class="err">Laden fehlgeschlagen: ${esc(e.message)}. Internet prüfen oder 1 Minute warten (Rate-Limit). Ein CoinGecko-Key unter ⚙︎ hilft.</div>`); });
 $("#bSettings").onclick = openSettings;
 $("#q").oninput = render;
 $("#sort").onchange = render;
 $("#list").onclick = e => { const c = e.target.closest(".coin"); if(c) openDetail(c.dataset.id); };
 render();
-if(!results.length || Date.now() - (stamp || 0) > 6 * 3600 * 1000) $("#bRefresh").click();
+if(!results.length || Date.now() - (stamp || 0) > 6*3600e3) $("#bRefresh").click();
 if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
 </body>
